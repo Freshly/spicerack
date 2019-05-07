@@ -78,7 +78,7 @@ Here's a checklist of some other tasks (see another gem as reference):
 - Delete `Gemfile`
 - Create a `CHANGELOG.md` and make the first entry
 - Edit `lib/GEM/version.rb` to add the comment line
-- Edit `README.md` to add badges, update development & contributor sections, generate ToC
+- Edit `README.md` to add badges, update development & contributor sections, generate `ToC`
 - Edit `./Rakefile` to add GEM to the `SPICERACK_GEMS` constant
 - Copy over `GEM/Rakefile` from any other gem
 - Remove the failing spec in `spec/GEM_spec.rb` and replace it with the rspice shared example
