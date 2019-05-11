@@ -4,6 +4,7 @@ require_relative "around_the_world/errors"
 require_relative "around_the_world/method_wrapper"
 require_relative "around_the_world/proxy_module"
 require_relative "around_the_world/version"
+require "active_support/core_ext/object"
 require "active_support/concern"
 require "active_support/descendants_tracker"
 
