@@ -26,14 +26,14 @@ require "technologic/setup"
 module Technologic
   extend ActiveSupport::Concern
 
-  SEVERITIES = %i[debug info warn error fatal].freeze
+  SEVERITIES = { debug: :debug, info: :info, warn: :warn, error: :error, fatal: :fatal } # rubocop:disable Style/MutableConstant
   EXCEPTION_SEVERITIES = %i[error fatal].freeze
 
   included do
     delegate :instrument, :surveil, to: :class
     protected :instrument, :surveil
 
-    SEVERITIES.each do |severity|
+    SEVERITIES.keys.each do |severity|
       delegate severity, to: :class
       protected severity # rubocop:disable Style/AccessModifierDeclarations
     end
@@ -63,12 +63,12 @@ module Technologic
       instrument(severity, "#{event}_finished", &block)
     end
 
-    SEVERITIES.each do |severity|
-      define_method(severity) { |event, **data, &block| instrument(severity, event, **data, &block) }
+    SEVERITIES.each do |severity, method_name|
+      define_method(method_name) { |event, **data, &block| instrument(severity, event, **data, &block) }
     end
 
     EXCEPTION_SEVERITIES.each do |severity|
-      define_method("#{severity}!") do |exception = StandardError, message = nil, **data, &block|
+      define_method("#{SEVERITIES[severity]}!") do |exception = StandardError, message = nil, **data, &block|
         if exception.is_a?(Exception)
           instrument(
             severity,

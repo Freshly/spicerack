@@ -12,7 +12,7 @@ RSpec.describe Technologic do
   describe "::SEVERITIES" do
     subject { described_class::SEVERITIES }
 
-    it { is_expected.to be_an Array }
+    it { is_expected.to be_a Hash }
   end
 
   describe "::EXCEPTION_SEVERITIES" do
@@ -36,7 +36,7 @@ RSpec.describe Technologic do
   shared_context "with instrumentation data having a random severity" do
     include_context "with instrumentation data"
 
-    let(:severity) { Technologic::SEVERITIES.sample }
+    let(:severity) { Technologic::SEVERITIES.keys.sample }
   end
 
   shared_examples_for "it's instrumented with severity" do
