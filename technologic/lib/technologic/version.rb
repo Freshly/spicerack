@@ -2,5 +2,5 @@
 
 module Technologic
   # This constant is managed by spicerack
-  VERSION = "0.14.3"
+  VERSION = "0.15.2pre"
 end
