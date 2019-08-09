@@ -22,6 +22,7 @@ require "technologic/debug_subscriber"
 require "technologic/logger"
 require "technologic/config_options"
 require "technologic/setup"
+require "technologic/simple_log_formatter"
 
 module Technologic
   extend ActiveSupport::Concern
