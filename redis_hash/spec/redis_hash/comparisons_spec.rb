@@ -6,10 +6,10 @@ RSpec.describe RedisHash::Comparisons, type: :module do
   it { is_expected.to delegate_method(:compare_by_identity).to(:to_h) }
   it { is_expected.to delegate_method(:compare_by_identity?).to(:to_h) }
 
-  it { is_expected.to alias_method(:==, :eql?) }
+  it { is_expected.to alias_method :==, :eql? }
 
-  describe "#eql?" do
-    subject(:eql?) { example_redis_hash.eql? other }
+  describe "#==" do
+    subject { example_redis_hash == other }
 
     context "when other is nil" do
       let(:other) { nil }

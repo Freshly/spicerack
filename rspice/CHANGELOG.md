@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.15.1
+
+*Release Date*: 8/8/2019
+
+- Fixed an error raised when active_support was not included
+
+## v0.15.0
+
+*Release Date*: 8/8/2019
+
+- Make class pass a bit more flexible
+
+## v0.14.3
+
+*Release Date*: 8/5/2019
+
+- Make faker req less restrictive
+
 ## v0.14.2
 
 *Release Date*: 6/26/2019

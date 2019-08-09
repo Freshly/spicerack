@@ -35,6 +35,7 @@ Or install it yourself as:
 ## Included Gems
 
 * [AroundTheWorld](around_the_world/README.md) allows you to easily wrap methods with custom logic on any class.
+* [Collectible](collectible/README.md) provides an extensible framework for building array-like object collections.
 * [RedisHash](redis_hash/README.md) provides a class that matches the Hash api by wrapping Redis.
 * [RSpice](rspice/README.md) is an `RSpec` utility gem of custom matchers, shared contexts and examples.
 * [ShortCircuIt](short_circu_it/README.md) is an intelligent and feature rich memoization gem.

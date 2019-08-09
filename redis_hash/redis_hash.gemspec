@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "activesupport", "~> 5.2.1"
   spec.add_runtime_dependency "redis", ">= 3.0"
+  spec.add_runtime_dependency "tablesalt", RedisHash::VERSION
 end

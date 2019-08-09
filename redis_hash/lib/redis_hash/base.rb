@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "tablesalt/uses_hash_for_equality"
+
 require_relative "concerns/adapter"
 require_relative "concerns/default"
 require_relative "concerns/callbacks"
@@ -19,6 +21,8 @@ require_relative "concerns/expiration"
 
 module RedisHash
   class Base
+    include Tablesalt::UsesHashForEquality
+
     include RedisHash::Adapter
     include RedisHash::Default
     include RedisHash::Callbacks

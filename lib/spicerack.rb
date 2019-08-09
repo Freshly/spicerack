@@ -14,6 +14,8 @@ require "technologic"
 
 require "redis_hash"
 
+require "collectible"
+
 require "spicerack/array_index"
 require "spicerack/hash_model"
 require "spicerack/redis_model"

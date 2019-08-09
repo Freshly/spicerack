@@ -34,13 +34,13 @@
 RSpec.shared_examples_for "a class pass method" do |method|
   subject do
     if accepts_block?
-      call_class.public_send(method, *arguments, &block)
+      call_class.public_send(method, *arguments, **options, &block)
     else
-      call_class.public_send(method, *arguments)
+      call_class.public_send(method, *arguments, **options)
     end
   end
 
-  let(:call_class) { described_class }
+  let(:call_class) { test_class }
   let(:test_class) { described_class }
 
   let(:method_parameters) { test_class.instance_method(:initialize).parameters }
@@ -48,11 +48,7 @@ RSpec.shared_examples_for "a class pass method" do |method|
   let(:option_keys) { method_parameters.select { |param| param.first.in?(%i[key keyreq]) }.map(&:last) }
   let(:accepts_block?) { method_parameters.any? { |param| param.first == :block } }
 
-  let(:arguments) do
-    Array.new(argument_arity) { double }.tap do |array|
-      array << options if options.present?
-    end
-  end
+  let(:arguments) { Array.new(argument_arity) { double } }
   let(:options) { option_keys.each_with_object({}) { |key, hash| hash[key] = Faker::Lorem.word } }
   let(:block) { -> {} }
   let(:instance) { instance_double(test_class) }
@@ -62,9 +58,9 @@ RSpec.shared_examples_for "a class pass method" do |method|
     allow(instance).to receive(method).and_return(output)
 
     if accepts_block?
-      allow(test_class).to receive(:new).with(*arguments, &block).and_return(instance)
-    elsif arguments.any?
-      allow(test_class).to receive(:new).with(*arguments).and_return(instance)
+      allow(test_class).to receive(:new).with(*arguments, **options, &block).and_return(instance)
+    elsif arguments.any? || options.any?
+      allow(test_class).to receive(:new).with(*arguments, **options).and_return(instance)
     else
       allow(test_class).to receive(:new).with(no_args).and_return(instance)
     end

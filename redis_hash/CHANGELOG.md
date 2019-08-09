@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.15.1
+
+*Release Date*: 8/8/2019
+
+- Refactored comparison to use `Tablesalt::UsesHashForEquality`
+
+## v0.15.0
+
+*Release Date*: 8/8/2019
+
+- No changes
+
+## v0.14.3
+
+*Release Date*: 8/5/2019
+
+- No changes
+
 ## v0.14.2
 
 *Release Date*: 6/26/2019
