@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "configurable/config_builder"
+require_relative "configurable/config"
 require_relative "configurable/reader"
 
 # NOTE: This is still a pre-release feature! Use at your own risk - it may change before being released.

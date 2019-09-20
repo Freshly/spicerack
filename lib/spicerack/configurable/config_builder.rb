@@ -12,8 +12,9 @@ module Spicerack
       end
 
       # NOTE: options must be set up before {#configure} is called
-      def option(*args)
-        config_class.__send__(:option, *args)
+      def option(name, *args)
+        config_class.__send__(:option, name, *args)
+        config_class.protect_config(name)
       end
 
       private
@@ -23,7 +24,7 @@ module Spicerack
       end
 
       def config_class
-        @config_class ||= Class.new(InputObject)
+        @config_class ||= Class.new(Config)
       end
     end
   end
