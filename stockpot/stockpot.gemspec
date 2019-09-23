@@ -7,15 +7,13 @@ require "stockpot/version"
 Gem::Specification.new do |spec|
   spec.name          = "stockpot"
   spec.version       = Stockpot::VERSION
-  spec.authors       = ["Jayson Smith"]
-  spec.email         = ["gh@nes.33mail.com"]
+  spec.authors       = [ "Jayson Smith" ]
+  spec.email         = [ "gh@nes.33mail.com" ]
 
   spec.summary       = "Makes setting up test data in your Rails database from an external resource easier."
   spec.description   = "Exposes a few end points from your app, easily enabling CRUD actions on your database that you can utilize from things like a standalone test suite to set up state. (think: Cypress, Cucumber, etc.)"
   spec.homepage      = "https://github.com/Freshly/spicerack/tree/master/stockpot"
   spec.license       = "MIT"
-
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
@@ -24,5 +22,9 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["README.md", "LICENSE.txt", "lib/**/{*,.[a-z]*}"]
   spec.require_paths = "lib"
 
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_dependency "rails", "5.2.3"
+
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec-rails"
 end

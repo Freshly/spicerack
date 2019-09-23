@@ -41,9 +41,9 @@ Or install it yourself as:
 * [RSpice](rspice/README.md) is an `RSpec` utility gem of custom matchers, shared contexts and examples.
 * [ShortCircuIt](short_circu_it/README.md) is an intelligent and feature rich memoization gem.
 * [Spicerack::Styleguide](spicerack-styleguide/README.md) is [Freshly](https://www.freshly.com/)'s Rubocop Styleguide for Rails and RSpec.
-* [Stockpot](stockpot/README.md) makes setting up test data in your Rails database from an external location easier.
 * [Technologic](technologic/README.md) is a logging system built on an extensible event triggering system requiring minimal implementation.
 * [Tablesalt](tablesalt/README.md) is full of miscellaneous helper modules, POROs, and more, that standardize common behavior.
+* [Stockpot](stockpot/README.md) makes setting up test data in your Rails database from an external location easier.
 
 ## Development
 

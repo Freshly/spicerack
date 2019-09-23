@@ -41,6 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "short_circu_it", version
   spec.add_dependency "technologic", version
   spec.add_dependency "tablesalt", version
+  spec.add_dependency "stockpot", version
 
   spec.add_development_dependency "bundler", "~> 2.0.1"
   spec.add_development_dependency "rake", "~> 10.0"

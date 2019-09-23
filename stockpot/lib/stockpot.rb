@@ -2,4 +2,4 @@
 
 require "stockpot/version"
 
-
+module Stockpot; end

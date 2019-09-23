@@ -1,10 +1,10 @@
 # Changelog
 
-## v0.17.0
+## Upcoming
 
-*Release Date*: Unreleased
+### StockPot - [see changes](stockpot/CHANGELOG.md#v0163pre)
 
-- Added Stockpot
+- Claimed gem name
 
 ## v0.16.3
 
