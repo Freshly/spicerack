@@ -11,4 +11,9 @@
 .rspec_status
 
 # rails dummy tracking
-/test/dummy/log
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/db/log/*.log
+spec/dummy/tmp/
+spec/dummy/.sass-cache
+spec/dummy/log/
