@@ -33,7 +33,7 @@ RSpec.describe Spicerack::Configurable::ConfigBuilder do
   describe "#configure" do
     it "yields the input object" do
       builder.configure do |config|
-        expect(config).to be_a Spicerack::InputObject
+        expect(config).to be_a Spicerack::Configurable::ConfigObject
 
         all_options.each do |opt|
           expect(config).to define_option opt, default: default_values[opt]

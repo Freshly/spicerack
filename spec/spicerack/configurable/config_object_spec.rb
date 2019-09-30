@@ -71,4 +71,30 @@ RSpec.describe Spicerack::Configurable::ConfigObject do
       end
     end
   end
+
+  describe "#to_h" do
+    context "when an option is defined without a default" do
+      context "when the option is configured" do
+        it "does something"
+      end
+
+      context "when the option is not configured" do
+        it "does something"
+      end
+    end
+
+    context "when an option is defined with a default" do
+      context "when the option is configured" do
+        it "does something"
+      end
+
+      context "when the option is not configured" do
+        it "does something"
+      end
+    end
+
+    context "when a nested option is configured" do
+        it "does something"
+    end
+  end
 end
