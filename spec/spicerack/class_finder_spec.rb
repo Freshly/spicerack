@@ -17,6 +17,62 @@ RSpec.describe Spicerack::ClassFinder do
     end
   end
 
+  describe "for!" do
+    subject(:for!) { class_finder.for!(object) }
+
+    let(:object) { double }
+
+    context "when nil" do
+      it "raises" do
+        expect { for! }.to raise_error Spicerack::ClassFinder::NotFoundError
+      end
+    end
+
+    context "when class" do
+      let(:class_for) do
+        Class.new do
+          attr_reader :object
+
+          def initialize(object)
+            @object = object
+          end
+        end
+      end
+
+      before { allow(class_finder).to receive(:class_for!).with(object).and_return(class_for) }
+
+      it { is_expected.to be_an_instance_of class_for }
+      it { is_expected.to have_attributes(object: object) }
+    end
+  end
+
+  describe "for" do
+    subject(:for) { class_finder.for(object) }
+
+    let(:object) { double }
+
+    context "when nil" do
+      it { is_expected.to be_nil }
+    end
+
+    context "when class" do
+      let(:class_for) do
+        Class.new do
+          attr_reader :object
+
+          def initialize(object)
+            @object = object
+          end
+        end
+      end
+
+      before { allow(class_finder).to receive(:class_for).with(object).and_return(class_for) }
+
+      it { is_expected.to be_an_instance_of class_for }
+      it { is_expected.to have_attributes(object: object) }
+    end
+  end
+
   describe "#class_for!" do
     subject(:class_for!) { class_finder.class_for!(object) }
 

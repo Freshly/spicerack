@@ -79,6 +79,14 @@ module Spicerack
       @class_type = class_type
     end
 
+    def for!(object)
+      class_for!(object).new(object)
+    end
+
+    def for(object)
+      class_for(object).try(:new, object)
+    end
+
     def class_for!(object)
       class_for(object) or raise NotFoundError, "could not find `#{class_type}' for `#{object.inspect}'"
     end
