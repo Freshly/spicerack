@@ -5,10 +5,12 @@ module Spicerack
   module Junction
     extend ActiveSupport::Concern
 
+    included do
+      delegate :conjugate!, to: :paradigm!
+    end
+
     class_methods do
       attr_reader :conjunction_suffix
-
-      delegate :conjugate!, to: :paradigm!
 
       def conjugate(junction)
         paradigm.try(:conjugate, junction)
