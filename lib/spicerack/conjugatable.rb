@@ -120,7 +120,7 @@ module Spicerack
 
     class_methods do
       def paradigm_name
-        try(:model_name).&name || name
+        try(:model_name)&.name || name
       end
 
       def conjugate!(junction)
