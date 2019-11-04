@@ -6,10 +6,12 @@ module Spicerack
     extend ActiveSupport::Concern
 
     included do
-      delegate :conjugate!, to: :paradigm!
+      delegate :conjugate!, to: :class
     end
 
     class_methods do
+      delegate :conjugate!, to: :paradigm!
+
       attr_reader :conjunction_suffix
 
       def conjugate(junction)

@@ -115,7 +115,7 @@ module Spicerack
     included do
       class_attribute :explicit_conjunctions, instance_writer: false, default: {}
 
-      delegate :paradigm_name, to: :class
+      delegate :paradigm_name, :conjugate, :conjugate!, to: :class
     end
 
     class_methods do
