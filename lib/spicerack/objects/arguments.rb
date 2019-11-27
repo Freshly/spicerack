@@ -10,7 +10,11 @@ module Spicerack
         class_attribute :_arguments, instance_writer: false, default: {}
         set_callback :initialize, :after do
           missing_arguments = _arguments.reject do |argument, options|
-            options[:allow_nil] ? input.key?(argument) : !input[argument].nil?
+            if options[:required]
+              input[argument].present?
+            else
+              options[:allow_nil] ? input.key?(argument) : !input[argument].nil?
+            end
           end
 
           missing = missing_arguments.keys
@@ -28,8 +32,8 @@ module Spicerack
 
         private
 
-        def argument(argument, allow_nil: true)
-          _arguments[argument] = { allow_nil: allow_nil }
+        def argument(argument, allow_nil: true, required: false)
+          _arguments[argument] = { allow_nil: allow_nil, required: required }
           define_attribute argument
         end
       end
