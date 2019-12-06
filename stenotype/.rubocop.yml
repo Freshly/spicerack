@@ -1,0 +1,7 @@
+inherit_gem:
+  spicerack-styleguide:
+    - rubocop.yml
+
+# Disabled since ApplicationJob is only defined in a real application
+Rails/ApplicationJob:
+  Enabled: false

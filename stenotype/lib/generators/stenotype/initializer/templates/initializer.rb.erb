@@ -1,0 +1,65 @@
+# frozen_string_literal: true
+
+Rails.application.configure do
+  #
+  # Stenotype allows you to emit events which are then being published to a list of
+  # targets. Currently two targets are provided by default: Google Cloud Pub Sub and
+  # STDOUT for debug purposes.
+  #
+  # There is also a rails integration module which defines a handy DSL
+  # for triggering events in various Rails components. ActionController and
+  # ActiveJob are supported at the time of writing.
+  #
+  # Both extensions for Rails are enabled by default, but there are config options
+  # to control their presence.
+  # config.stenotype.rails do |rails_modules|
+  #   rails_modules.enable_action_controller_ext = true
+  #   rails_modules.enable_active_job_ext = true
+  # end
+  #
+  #
+  # To make publishing possible one must specify a list of targets. You could use
+  # StdoutAdapter for debug purposes before switching to a production publisher.
+  # By default the list of targets is empty and you'll get an error saying
+  # that no targets are specified.
+  #
+  # A config option is available for setting up the targets:
+  #
+  # config.stenotype.targets = [Stenotype::Adapters::StdoutAdapter.new]
+  #
+  # Or using Google Cloud:
+  #
+  # config.stenotype.targets = [Stenotype::Adapters::GoogleCloud.new]
+  #
+  # Or both:
+  #
+  # config.stenotype.targets = [
+  #   Stenotype::Adapters::StdoutAdapter.new,
+  #   Stenotype::Adapters::GoogleCloud.new
+  # ]
+  #
+  # To be able to use Google Cloud one has to specify Google Cloud credentials:
+  #
+  # config.stenotype.google_cloud do |gc_config|
+  #   gc_config.credentials = "SPECIFY YOUR CREDENTIALS" # path/to/key.json
+  #   gc_config.project_id = "SPECIFY YOUR PROJECT ID"
+  #   gc_config.topic = "SPECIFY YOUR TOPIC"
+  #   gc_config.mode = :async
+  # end
+  #
+  # Each event is shipped with a UUID generated with SecureRandom by default.
+  # This might be changed by using a corresponding config option. Note that
+  # uuid_generator expects method #uuid to be implemented
+  #
+  # config.stenotype.uuid_generator = SecureRandom
+  #
+  # In rare cases you might want to get control over how the event is being dispatched.
+  # Dispatcher must implement instance method #publish.
+  # Which dispatcher to use is controlled by the following config option:
+  #
+  # config.stenotype.dispatcher = Stenotype::Dispatcher
+  #
+end
+
+# For more usage instructions please refer to either README.md or yard documentation
+# in gem repository https://github.com/Freshly/stenotype

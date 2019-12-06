@@ -1,0 +1,8 @@
+Description:
+    Generate the Stenotype configuration initializer.
+
+Example:
+    `rails generate stenotype:initializer`
+
+    Generates:
+      Initializer: config/initializers/stenotype.rb
