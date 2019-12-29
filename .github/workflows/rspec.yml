@@ -51,7 +51,6 @@ jobs:
       run: |
         bundle exec rspec
 
-
   ruby_2_6_rails_5_2:
     runs-on: ubuntu-latest
 
@@ -91,6 +90,54 @@ jobs:
         sudo apt-get install libsqlite3-dev
         sudo apt-get install redis-server
         gem install bundler -v "~> 2.0.1"
+        echo "gem 'activesupport', '~> 6.0.0'" >> Gemfile
+        echo "gem 'activerecord', '~> 6.0.0'" >> Gemfile
+        echo "gem 'railties', '~> 6.0.0'" >> Gemfile
+        bundle update activesupport activerecord railties
+        bundle install --jobs 4 --retry 3
+    - name: Run RSpec
+      run: |
+        bundle exec rspec
+
+  ruby_2_7_rails_5_2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.7
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7.x
+    - name: Set up dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libsqlite3-dev
+        sudo apt-get install redis-server
+        gem install bundler
+        echo "gem 'activesupport', '~> 5.2.0'" >> Gemfile
+        echo "gem 'activerecord', '~> 5.2.0'" >> Gemfile
+        echo "gem 'railties', '~> 5.2.0'" >> Gemfile
+        bundle update activesupport activerecord railties
+        bundle install --jobs 4 --retry 3
+    - name: Run RSpec
+      run: |
+        bundle exec rspec
+
+  ruby_2_7_rails_6_0:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.7
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7.x
+    - name: Set up dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libsqlite3-dev
+        sudo apt-get install redis-server
+        gem install bundler
         echo "gem 'activesupport', '~> 6.0.0'" >> Gemfile
         echo "gem 'activerecord', '~> 6.0.0'" >> Gemfile
         echo "gem 'railties', '~> 6.0.0'" >> Gemfile
