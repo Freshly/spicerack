@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.20.1
+
+*Release Date*: 1/6/2020
+
+### Rspice - [see changes](rspice/CHANGELOG.md#v0201)
+
+## 0.20.0.1
+
+*Release Date*: 1/3/2020
+
+- Add missing require statement
+
+## 0.20.0
+
+*Release Date*: 1/3/2020
+
+- Add callback support to Configurable, add `configure` callback event ([#318](https://github.com/Freshly/spicerack/pull/318)), ([#320](https://github.com/Freshly/spicerack/pull/320)), ([#321](https://github.com/Freshly/spicerack/pull/321))
+
 ## v0.19.3
 
 *Release Date*: 12/16/2019

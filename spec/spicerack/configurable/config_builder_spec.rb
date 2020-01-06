@@ -15,6 +15,14 @@ RSpec.describe Spicerack::Configurable::ConfigBuilder do
     default_values.each { |opt, default| builder.option opt, default: default }
   end
 
+  describe "Callbacks" do
+    describe "configure" do
+      subject { described_class.__callbacks[:configure] }
+
+      it { is_expected.to be_a ActiveSupport::Callbacks::CallbackChain }
+    end
+  end
+
   describe "#reader" do
     subject(:reader) { builder.reader }
 

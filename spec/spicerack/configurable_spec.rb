@@ -54,6 +54,34 @@ RSpec.describe Spicerack::Configurable, type: :configuration do
     end
   end
 
+  describe ".before_configure" do
+    let(:callback_proc) { -> {} }
+    let(:last_callback) do
+      example_configurable.__send__(:_config_builder_class).__callbacks[:configure].__send__(:chain).last
+    end
+
+    before { example_configurable.before_configure(&callback_proc) }
+
+    it "sets up a callback" do
+      expect(last_callback.kind).to eq :before
+      expect(last_callback.instance_values["filter"]).to eq callback_proc
+    end
+  end
+
+  describe ".after_configure" do
+    let(:callback_proc) { -> {} }
+    let(:last_callback) do
+      example_configurable.__send__(:_config_builder_class).__callbacks[:configure].__send__(:chain).last
+    end
+
+    before { example_configurable.after_configure(&callback_proc) }
+
+    it "sets up a callback" do
+      expect(last_callback.kind).to eq :after
+      expect(last_callback.instance_values["filter"]).to eq callback_proc
+    end
+  end
+
   describe "writers" do
     it "doesn't set writers for the config options" do
       expect { example_configurable.configuration.no_default = Faker::Lorem.word }.to raise_error(NoMethodError)

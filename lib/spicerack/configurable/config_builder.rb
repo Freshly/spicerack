@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
+require "technologic"
+require "active_support/callbacks"
+
+require_relative "config_builder/double_configure"
+
 module Spicerack
   module Configurable
     class ConfigBuilder
+      include ActiveSupport::Callbacks
+      define_callbacks :configure
+
+      # This concern uses the configure callback, so it needs to be included after the callback is defined
+      include DoubleConfigure
+
       delegate :config_eval, to: :reader
 
       def reader
@@ -10,8 +21,10 @@ module Spicerack
       end
 
       def configure
-        mutex.synchronize do
-          yield configuration
+        run_callbacks :configure do
+          mutex.synchronize do
+            yield configuration
+          end
         end
       end
 
@@ -25,6 +38,8 @@ module Spicerack
       end
 
       private
+
+      attr_writer :configure_called
 
       def configuration
         config_class.instance

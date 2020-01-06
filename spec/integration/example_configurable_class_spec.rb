@@ -46,6 +46,24 @@ RSpec.describe ExampleConfigurableClass, type: :configuration do
   let(:described_class) { configurable_module }
   let(:config) { configurable_module.config }
 
+  let(:called_from_before_callback) { double(called_inside_callback: true) }
+  let(:called_from_after_callback) { double(called_inside_callback: true) }
+
+  before do
+    allow(called_from_before_callback).to receive(:called_inside_callback)
+    allow(called_from_after_callback).to receive(:called_inside_callback)
+
+    configurable_module.instance_exec(self) do |spec_context|
+      before_configure do
+        spec_context.called_from_before_callback.called_inside_callback
+      end
+
+      after_configure do
+        spec_context.called_from_after_callback.called_inside_callback
+      end
+    end
+  end
+
   it { is_expected.to define_config_option(:option_without_default) }
   it { is_expected.to define_config_option(:option_with_default, default: "default value") }
   it { is_expected.to define_config_option(:option_with_default_block, default: "default value from block") }
@@ -167,6 +185,11 @@ RSpec.describe ExampleConfigurableClass, type: :configuration do
         expect(configurable_module.config_eval(:nested_config, :double_nested, :double_nested_option_with_default_block).read).
           to eq "double nested default value from block"
       end
+    end
+
+    it "does not call callbacks" do
+      expect(called_from_before_callback).not_to have_received(:called_inside_callback)
+      expect(called_from_after_callback).not_to have_received(:called_inside_callback)
     end
   end
 
@@ -315,6 +338,11 @@ RSpec.describe ExampleConfigurableClass, type: :configuration do
         expect(configurable_module.config_eval(:nested_config, :double_nested, :double_nested_option_with_default_block).read).
           to eq double_nested_option_with_default_block_override
       end
+    end
+
+    it "calls callbacks" do
+      expect(called_from_before_callback).to have_received(:called_inside_callback)
+      expect(called_from_after_callback).to have_received(:called_inside_callback)
     end
   end
 

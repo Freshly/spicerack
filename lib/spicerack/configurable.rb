@@ -54,8 +54,25 @@ module Spicerack
   module Configurable
     delegate :configure, :config_eval, to: :_config_builder
 
+    # @return [Spicerack::Configurable::ConfigReader] A read-only object containing configuration options set inside {#configure}
     def config
       _config_builder.reader
+    end
+
+    # Run a callback before the configure block is evaluated.
+    #
+    # Note: if configure is called multiple times for your gem, this block will get run each time!
+    #
+    def before_configure(&block)
+      _config_builder_class.set_callback(:configure, :before, &block)
+    end
+
+    # Run a callback after the configure block is evaluated.
+    #
+    # Note: if configure is called multiple times for your gem, this block will get run each time!
+    #
+    def after_configure(&block)
+      _config_builder_class.set_callback(:configure, :after, &block)
     end
 
     private
@@ -65,7 +82,13 @@ module Spicerack
     end
 
     def _config_builder
-      @_config_builder ||= ConfigBuilder.new
+      @_config_builder ||= _config_builder_class.new
+    end
+
+    def _config_builder_class
+      @_config_builder_class ||= Class.new(ConfigBuilder).tap do |klass|
+        const_set(:ConfigBuilder, klass)
+      end
     end
   end
 end
