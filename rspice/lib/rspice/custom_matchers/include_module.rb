@@ -25,6 +25,6 @@ RSpec::Matchers.define :include_module do |expected_module|
   end
 
   def test_subject
-    subject.is_a?(Class) ? subject : subject.class
+    target.is_a?(Class) ? target : target.class
   end
 end

@@ -1,6 +1,12 @@
 # Changelog
 
-## v0.20.1
+## v0.20.2
+
+*Release Date*: 1/6/2020
+
+### Rspice - [see changes](rspice/CHANGELOG.md#v0202)
+
+## v0.20.1 [Yanked]
 
 *Release Date*: 1/6/2020
 
