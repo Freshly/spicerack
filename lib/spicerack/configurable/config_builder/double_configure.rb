@@ -27,7 +27,7 @@ module Spicerack
 
         puts <<~WARNING
           #{self.class._configurable_module_name}.configure has been called more than once, which can lead to unexpected consequences.
-          For the most predictable behavior, configure should only be called once per library.
+          For the most predictable behavior, configure should only be called once.
         WARNING
       end
 

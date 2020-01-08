@@ -25,6 +25,10 @@ module Spicerack
         alias_method :attribute, :define_attribute
       end
 
+      def to_h
+        _attributes.each_with_object({}) { |attr, hash| hash[attr] = public_send(attr) }
+      end
+
       private
 
       def stringable_attributes

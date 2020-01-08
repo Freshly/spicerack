@@ -3,6 +3,18 @@
 RSpec.describe Spicerack::Objects::Attributes, type: :module do
   include_context "with an example input object"
 
+  shared_context "with attributes defined on the class" do
+    let(:attributes) { Faker::Lorem.words(rand(2..5)).map(&:to_sym) }
+
+    before do
+      example_input_object_class.instance_exec(self) do |spec_context|
+        spec_context.attributes.each do |attr|
+          define_attribute attr
+        end
+      end
+    end
+  end
+
   describe ".define_attribute" do
     subject(:define_attribute) { example_input_object_class.__send__(:define_attribute, attribute) }
 
@@ -34,12 +46,31 @@ RSpec.describe Spicerack::Objects::Attributes, type: :module do
     end
   end
 
+  describe "#to_h" do
+    subject { example_input_object.to_h }
+
+    include_context "with attributes defined on the class"
+
+    let(:values) { Faker::Hipster.words(attributes.length) }
+    let(:input) { attributes.zip(values).to_h }
+
+    it { is_expected.to eq input }
+
+    context "when contain a nested input object" do
+      let(:nested_input_object) { example_input_object_class.new(**nested_input) }
+      let(:nested_values) { values.map(&:reverse) }
+      let(:nested_input) { attributes.zip(nested_values).to_h }
+
+      before { input[attributes.sample] = nested_input_object }
+
+      it { is_expected.to eq input }
+    end
+  end
+
   describe "#stringable_attributes" do
     subject { example_input_object.__send__(:stringable_attributes) }
 
-    let(:attributes) { Faker::Lorem.words(rand(1..3)).map(&:to_sym) }
-
-    before { allow(example_input_object_class).to receive(:_attributes).and_return(attributes) }
+    include_context "with attributes defined on the class"
 
     it { is_expected.to eq attributes }
   end
