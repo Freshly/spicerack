@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.21.0
+
+*Release Date*: 1/10/2020
+
+- No changes
+
+## v0.20.4 [Yanked]
+
+*Release Date*: 1/8/2020
+
+## v0.20.3 [Yanked]
+
+*Release Date*: 1/8/2020
+
 ## v0.20.2
 
 *Release Date*: 1/6/2020

@@ -11,7 +11,7 @@ require "will_paginate"
 require "will_paginate/active_record"
 
 require_relative "../lib/spicerack/version"
-require_relative "../lib/spicerack/spec_helper"
+require_relative "../spicery/lib/spicery/spec_helper"
 
 require_relative "shared_examples/a_versioned_spicerack_gem"
 

@@ -1,5 +1,25 @@
 # Changelog
 
+## v0.21.0
+
+*Release Date*: 1/10/2020
+
+### Conjunction - [see changes](conjunction/CHANGELOG.md#v0210)
+### Spicery - [see changes](spicery/CHANGELOG.md#v0210)
+
+- Add `.to_h` method to AttributeObjects ([#326](https://github.com/Freshly/spicerack/pull/326))
+- Improve failure message for `define_config_option` matcher ([#327](https://github.com/Freshly/spicerack/pull/327))
+- Fix unintentionally committed `StatefulObject` ([#334](https://github.com/Freshly/spicerack/pull/334))
+- Rename `StatefulObject` to `OutputObject` ([#335](https://github.com/Freshly/spicerack/pull/335))
+
+## v0.20.4 [Yanked]
+
+*Release Date*: 1/8/2020
+
+## v0.20.3 [Yanked]
+
+*Release Date*: 1/8/2020
+
 ## v0.20.2
 
 *Release Date*: 1/6/2020

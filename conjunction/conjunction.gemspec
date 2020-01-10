@@ -5,8 +5,8 @@ require "conjunction/version"
 Gem::Specification.new do |spec|
   spec.name          = "conjunction"
   spec.version       = Conjunction::VERSION
-  spec.authors       = ["Eric Garside"]
-  spec.email         = ["garside@gmail.com"]
+  spec.authors       = [ "Eric Garside" ]
+  spec.email         = %w[garside@gmail.com]
 
   spec.summary       = "Provides a mechanism to loosely coupled a suite of cross-referenced objects"
   spec.description   = "Join together related concepts for a common purpose with Conjugation"
@@ -22,4 +22,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = "lib"
 
   spec.add_runtime_dependency "activesupport", ">= 5.2.1"
+
+  spec.add_runtime_dependency "spicerack", Conjunction::VERSION
+
+  spec.add_dependency "activemodel", ">= 5.2.1"
 end

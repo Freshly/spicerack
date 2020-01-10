@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+require_relative "custom_matchers/be_conjoined_to"
+require_relative "custom_matchers/be_conjugated_from"
+require_relative "custom_matchers/conjugate_into"
+require_relative "custom_matchers/define_prototype"
+require_relative "custom_matchers/have_conjunction_prefix"
+require_relative "custom_matchers/have_conjunction_suffix"
+require_relative "custom_matchers/have_junction_key"
+require_relative "custom_matchers/have_prototype"
+require_relative "custom_matchers/have_prototype_name"

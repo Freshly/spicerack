@@ -15,6 +15,6 @@ RSpec::Matchers.define :inherit_from do |superclass|
   failure_message_when_negated { "expected #{described_class.name} not to inherit from #{superclass}" }
 
   def test_subject
-    subject.is_a?(Class) ? subject : subject.class
+    subject.is_a?(Module) ? subject : subject.class
   end
 end

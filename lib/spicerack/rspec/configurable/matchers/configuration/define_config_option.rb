@@ -21,8 +21,8 @@ module Spicerack
           #       it { is_expected.to define_config_option :bar, default: :baz }
           #     end
           define :define_config_option do |option, default: nil|
-            description { "define config option #{option}" }
-            failure_message { "expected #{@obj} to define config option #{option} #{with_default(default)}".strip }
+            description { "define config option #{option.inspect}" }
+            failure_message { "expected #{@obj} to define config option #{option.inspect} with default #{default.inspect}" }
 
             match do |obj|
               @obj = obj
@@ -34,10 +34,6 @@ module Spicerack
                 expect(obj.config.instance_variable_get(:@config)).to be_present
                 expect(obj.config.instance_variable_get(:@config)).to define_option option, default: default
               end
-            end
-
-            def with_default(default)
-              "with default #{default}" unless default.nil?
             end
           end
         end

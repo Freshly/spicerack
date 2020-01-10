@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# RSpec matcher that tests usage of `.argument`
+# RSpec matcher that tests usage of `.isolate`
 #
 #     class Example
 #       include Tablesalt::Isolation
