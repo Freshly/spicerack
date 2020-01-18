@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "config_object/deprecation"
+
 module Spicerack
   module Configurable
     class ConfigObject < InputObject
