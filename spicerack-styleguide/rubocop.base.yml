@@ -1,0 +1,1334 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - "**/bin/**/*"
+    - Rakefile
+    - spec/*_helper.rb
+    - "**/db/**/*"
+    - Gemfile.lock
+    - "*.gemspec"
+
+Layout/AccessModifierIndentation:
+  Enabled: true
+  EnforcedStyle: indent
+Layout/AlignArray:
+  Enabled: true
+Layout/AlignHash:
+  Enabled: true
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: always_inspect
+Layout/AlignParameters:
+  Enabled: true
+  EnforcedStyle: with_first_parameter
+Layout/BlockAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_block
+Layout/BlockEndNewline:
+  Enabled: true
+Layout/CaseIndentation:
+  Enabled: false
+Layout/ClassStructure:
+  Categories:
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+  ExpectedOrder:
+    - module_inclusion
+    - constants
+    - public_class_methods
+    - initializer
+    - public_methods
+    - protected_methods
+    - private_methods
+Layout/ClosingParenthesisIndentation:
+  Enabled: true
+Layout/CommentIndentation:
+  Enabled: true
+Layout/ConditionPosition:
+  Enabled: true
+Layout/DefEndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: def
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: trailing
+Layout/ElseAlignment:
+  Enabled: true
+Layout/EmptyComment:
+  Enabled: true
+  AllowBorderComment: true
+  AllowMarginComment: true
+Layout/EmptyLineAfterMagicComment:
+  Enabled: true
+Layout/EmptyLineBetweenDefs:
+  Enabled: true
+  AllowAdjacentOneLineDefs: true
+Layout/EmptyLines:
+  Enabled: false
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: true
+  EnforcedStyle: around
+Layout/EmptyLinesAroundArguments:
+  Enabled: true
+Layout/EmptyLinesAroundBeginBody:
+  Enabled: true
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: true
+  EnforcedStyle: no_empty_lines
+Layout/EmptyLinesAroundClassBody:
+  Enabled: true
+  EnforcedStyle: no_empty_lines
+Layout/EmptyLinesAroundExceptionHandlingKeywords:
+  Enabled: true
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: true
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: true
+  EnforcedStyle: no_empty_lines
+Layout/EndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_line
+Layout/EndOfLine:
+  Enabled: true
+  EnforcedStyle: native
+Layout/ExtraSpacing:
+  Enabled: true
+  AllowForAlignment: false
+  ForceEqualSignAlignment: false
+  Exclude:
+    - "**/*.gemspec"
+Layout/FirstArrayElementLineBreak:
+  Enabled: false
+Layout/FirstHashElementLineBreak:
+  Enabled: false
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+Layout/FirstMethodParameterLineBreak:
+  Enabled: true
+Layout/HeredocArgumentClosingParenthesis:
+  Enabled: true
+Lint/HeredocMethodCallPosition:
+  Enabled: true
+Layout/IndentAssignment:
+  Enabled: false
+Layout/IndentFirstArgument:
+  Enabled: true
+Layout/IndentFirstArrayElement:
+  Enabled: true
+  EnforcedStyle: consistent
+Layout/IndentFirstHashElement:
+  Enabled: true
+  EnforcedStyle: consistent
+Layout/IndentFirstParameter:
+  Enabled: true
+Layout/IndentHeredoc:
+  Enabled: true
+  EnforcedStyle: squiggly
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: normal
+Layout/IndentationWidth:
+  Enabled: true
+  Width: 2
+Layout/InitialIndentation:
+  Enabled: true
+Layout/LeadingCommentSpace:
+  Enabled: true
+Layout/MultilineArrayBraceLayout:
+  Enabled: true
+  EnforcedStyle: symmetrical
+Layout/MultilineAssignmentLayout:
+  Enabled: false
+Layout/MultilineBlockLayout:
+  Enabled: true
+Layout/MultilineHashBraceLayout:
+  Enabled: true
+  EnforcedStyle: symmetrical
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+Layout/MultilineMethodDefinitionBraceLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+Layout/MultilineOperationIndentation:
+  Enabled: true
+  EnforcedStyle: aligned
+Layout/RescueEnsureAlignment:
+  Enabled: true
+Layout/SpaceAfterColon:
+  Enabled: true
+Layout/SpaceAfterComma:
+  Enabled: true
+Layout/SpaceAfterMethodName:
+  Enabled: true
+Layout/SpaceAfterNot:
+  Enabled: true
+Layout/SpaceAfterSemicolon:
+  Enabled: true
+Layout/SpaceAroundBlockParameters:
+  Enabled: true
+  EnforcedStyleInsidePipes: no_space
+Layout/SpaceAroundEqualsInParameterDefault:
+  Enabled: true
+  EnforcedStyle: space
+Layout/SpaceAroundKeyword:
+  Enabled: true
+Layout/SpaceAroundOperators:
+  Enabled: true
+Layout/SpaceBeforeBlockBraces:
+  Enabled: true
+  EnforcedStyle: space
+Layout/SpaceBeforeComma:
+  Enabled: true
+Layout/SpaceBeforeComment:
+  Enabled: true
+Layout/SpaceBeforeFirstArg:
+  Enabled: true
+Layout/SpaceBeforeSemicolon:
+  Enabled: true
+Layout/SpaceInLambdaLiteral:
+  Enabled: true
+  EnforcedStyle: require_no_space
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: true
+  EnforcedStyle: compact
+  EnforcedStyleForEmptyBrackets: no_space
+Layout/SpaceInsideArrayPercentLiteral:
+  Enabled: true
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
+  SpaceBeforeBlockParameters: true
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  EnforcedStyle: compact
+  EnforcedStyleForEmptyBraces: no_space
+Layout/SpaceInsideParens:
+  Enabled: true
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: true
+Layout/SpaceInsideRangeLiteral:
+  Enabled: true
+Layout/SpaceInsideReferenceBrackets:
+  Enabled: true
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBrackets: no_space
+Layout/SpaceInsideStringInterpolation:
+  EnforcedStyle: no_space
+Layout/Tab:
+  Enabled: true
+Layout/TrailingBlankLines:
+  Enabled: true
+  EnforcedStyle: final_newline
+Layout/TrailingWhitespace:
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+Lint/AmbiguousOperator:
+  Enabled: true
+Lint/AmbiguousRegexpLiteral:
+  Enabled: true
+Lint/AssignmentInCondition:
+  Enabled: true
+Lint/BigDecimalNew:
+  Enabled: false
+Lint/BooleanSymbol:
+  Enabled: true
+Lint/CircularArgumentReference:
+  Enabled: true
+Lint/DisjunctiveAssignmentInConstructor:
+  Enabled: true
+Lint/Debugger:
+  Enabled: true
+Lint/DeprecatedClassMethods:
+  Enabled: true
+Lint/DuplicateCaseCondition:
+  Enabled: true
+Lint/DuplicateMethods:
+  Enabled: true
+Lint/DuplicatedKey:
+  Enabled: true
+Lint/EachWithObjectArgument:
+  Enabled: true
+Lint/ElseLayout:
+  Enabled: true
+Lint/EmptyEnsure:
+  Enabled: true
+Lint/EmptyExpression:
+  Enabled: true
+Lint/EmptyInterpolation:
+  Enabled: true
+Lint/EmptyWhen:
+  Enabled: true
+Lint/EndInMethod:
+  Enabled: true
+Lint/EnsureReturn:
+  Enabled: true
+Lint/FlipFlop:
+  Enabled: true
+Lint/FloatOutOfRange:
+  Enabled: true
+Lint/FormatParameterMismatch:
+  Enabled: true
+Lint/HandleExceptions:
+  Enabled: true
+Lint/ImplicitStringConcatenation:
+  Enabled: true
+Lint/IneffectiveAccessModifier:
+  Enabled: true
+Lint/InheritException:
+  Enabled: true
+  EnforcedStyle: standard_error
+Lint/InterpolationCheck:
+  Enabled: false
+Lint/LiteralAsCondition:
+  Enabled: true
+Lint/LiteralInInterpolation:
+  Enabled: true
+Lint/Loop:
+  Enabled: true
+Lint/MissingCopEnableDirective:
+  Enabled: true
+Lint/MultipleCompare:
+  Enabled: true
+Lint/NestedMethodDefinition:
+  Enabled: true
+Lint/NestedPercentLiteral:
+  Enabled: true
+Lint/NextWithoutAccumulator:
+  Enabled: true
+Lint/NonLocalExitFromIterator:
+  Enabled: true
+Lint/NumberConversion:
+  Enabled: false
+Lint/OrderedMagicComments:
+  Enabled: true
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: true
+Lint/PercentStringArray:
+  Enabled: true
+Lint/PercentSymbolArray:
+  Enabled: true
+Lint/RandOne:
+  Enabled: true
+Lint/RedundantWithIndex:
+  Enabled: true
+Lint/RedundantWithObject:
+  Enabled: true
+Lint/RegexpAsCondition:
+  Enabled: true
+Lint/RequireParentheses:
+  Enabled: true
+Lint/RescueException:
+  Enabled: true
+Lint/RescueType:
+  Enabled: true
+Lint/ReturnInVoidContext:
+  Enabled: true
+Lint/SafeNavigationChain:
+  Enabled: true
+Lint/SafeNavigationWithEmpty:
+  Enabled: true
+Lint/ScriptPermission:
+  Enabled: true
+Lint/ShadowedArgument:
+  Enabled: true
+Lint/ShadowedException:
+  Enabled: true
+Lint/ShadowingOuterLocalVariable:
+  Enabled: true
+Lint/StringConversionInInterpolation:
+  Enabled: true
+Lint/ToJSON:
+  Enabled: true
+Lint/UnderscorePrefixedVariableName:
+  Enabled: true
+Lint/UnifiedInteger:
+  Enabled: true
+Lint/UnneededCopDisableDirective:
+  Enabled: true
+Lint/UnneededCopEnableDirective:
+  Enabled: true
+Lint/UnneededRequireStatement:
+  Enabled: true
+Lint/UnneededSplatExpansion:
+  Enabled: true
+Lint/UnreachableCode:
+  Enabled: true
+Lint/UnusedBlockArgument:
+  Enabled: true
+Lint/UnusedMethodArgument:
+  Enabled: true
+Lint/UriEscapeUnescape:
+  Enabled: true
+Lint/UriRegexp:
+  Enabled: true
+Lint/UselessAccessModifier:
+  Enabled: true
+Lint/UselessAssignment:
+  Enabled: true
+Lint/UselessComparison:
+  Enabled: true
+Lint/UselessElseWithoutRescue:
+  Enabled: true
+Lint/UselessSetterCall:
+  Enabled: true
+Lint/Void:
+  Enabled: true
+  CheckForMethodsWithNoSideEffects: true
+  Exclude:
+    - spec/features/**/*
+
+Metrics/AbcSize:
+  Enabled: true
+  Max: 32
+Metrics/BlockLength:
+  Enabled: true
+  Max: 24
+  Exclude:
+    - "**/concerns/*"
+    - config/environments/*
+    - spec/**/*
+    - "**/*_spec.rb"
+    - "**/*.gemspec"
+Metrics/BlockNesting:
+  Enabled: true
+  Max: 3
+Metrics/ClassLength:
+  Enabled: false
+  Max: 240
+Metrics/CyclomaticComplexity:
+  Enabled: true
+  Max: 6
+Metrics/LineLength:
+  Enabled: false
+  Max: 120
+Metrics/MethodLength:
+  Enabled: true
+  Max: 24
+Metrics/ModuleLength:
+  Enabled: false
+  Max: 240
+Metrics/ParameterLists:
+  Enabled: true
+  Max: 6
+Metrics/PerceivedComplexity:
+  Enabled: true
+  Max: 6
+
+Naming/AccessorMethodName:
+  Enabled: true
+Naming/AsciiIdentifiers:
+  Enabled: true
+Naming/BinaryOperatorParameterName:
+  Enabled: true
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+Naming/ConstantName:
+  Enabled: true
+Naming/FileName:
+  Enabled: true
+Naming/HeredocDelimiterCase:
+  Enabled: true
+  EnforcedStyle: uppercase
+Naming/HeredocDelimiterNaming:
+  Enabled: true
+Naming/MemoizedInstanceVariableName:
+  Enabled: true
+Naming/MethodName:
+  Enabled: true
+  EnforcedStyle: snake_case
+Naming/PredicateName:
+  Enabled: true
+  NamePrefix:
+    - is_
+    - has_
+    - have_
+  NamePrefixBlacklist:
+    - is_
+    - has_
+    - have_
+  NameWhitelist:
+    - is_a?
+  MethodDefinitionMacros:
+    - define_method
+    - define_singleton_method
+  Exclude:
+    - app/serializers/*_serializer.rb
+    - spec/**/*
+Naming/RescuedExceptionsVariableName:
+  Enabled: true
+  PreferredName: exception
+Naming/UncommunicativeBlockParamName:
+  Enabled: true
+  MinNameLength: 1
+  AllowNamesEndingInNumbers: true
+Naming/UncommunicativeMethodParamName:
+  Enabled: true
+  MinNameLength: 2
+  AllowNamesEndingInNumbers: true
+  AllowedNames:
+    - a
+    - b
+    - io
+    - id
+    - to
+    - by
+    - on
+    - in
+    - at
+Naming/VariableName:
+  Enabled: true
+  EnforcedStyle: snake_case
+Naming/VariableNumber:
+  Enabled: true
+  EnforcedStyle: normalcase
+
+Performance/Caller:
+  Enabled: false
+Performance/CaseWhenSplat:
+  Enabled: true
+Performance/Casecmp:
+  Enabled: true
+Performance/CompareWithBlock:
+  Enabled: true
+Performance/Count:
+  Enabled: true
+Performance/Detect:
+  Enabled: true
+Performance/DoubleStartEndWith:
+  Enabled: true
+Performance/EndWith:
+  Enabled: true
+Performance/FixedSize:
+  Enabled: true
+Performance/FlatMap:
+  Enabled: true
+Performance/OpenStruct:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+Performance/RangeInclude:
+  Enabled: true
+Performance/RedundantBlockCall:
+  Enabled: true
+Performance/RedundantMatch:
+  Enabled: true
+Performance/RedundantMerge:
+  Enabled: true
+Performance/RegexpMatch:
+  Enabled: true
+Performance/ReverseEach:
+  Enabled: true
+Performance/Size:
+  Enabled: true
+Performance/StartWith:
+  Enabled: true
+Performance/StringReplacement:
+  Enabled: true
+Performance/TimesMap:
+  Enabled: true
+Performance/UnfreezeString:
+  Enabled: true
+Performance/UriDefaultParser:
+  Enabled: true
+Rails/ActionFilter:
+  Enabled: true
+  EnforcedStyle: action
+Rails/ActiveRecordAliases:
+  Enabled: true
+Rails/ActiveRecordOverride:
+  Enabled: true
+Rails/ActiveSupportAliases:
+  Enabled: true
+Rails/ApplicationJob:
+  Enabled: true
+Rails/ApplicationRecord:
+  Enabled: true
+Rails/BelongsTo:
+  Enabled: true
+Rails/Blank:
+  Enabled: true
+Rails/CreateTableWithTimestamps:
+  Enabled: true
+Rails/Date:
+  Enabled: true
+  EnforcedStyle: flexible
+Rails/Delegate:
+  Enabled: true
+Rails/DelegateAllowBlank:
+  Enabled: true
+Rails/DynamicFindBy:
+  Enabled: true
+Rails/EnumHash:
+  Enabled: true
+Rails/EnumUniqueness:
+  Enabled: true
+Rails/EnvironmentComparison:
+  Enabled: true
+Rails/Exit:
+  Enabled: true
+Rails/FilePath:
+  Enabled: true
+Rails/FindBy:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+Rails/FindEach:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+Rails/HasAndBelongsToMany:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/HelperInstanceVariable:
+  Enabled: true
+Rails/HttpPositionalArguments:
+  Enabled: true
+  Include:
+    - spec/**/*
+Rails/HttpStatus:
+  Enabled: true
+  EnforcedStyle: symbolic
+Rails/IgnoredSkipActionFilterOption:
+  Enabled: true
+Rails/InverseOf:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+Rails/LexicallyScopedActionFilter:
+  Enabled: true
+  Include:
+    - app/controllers/**/*.rb
+Rails/LinkToBlank:
+  Enabled: true
+Rails/NotNullColumn:
+  Enabled: true
+  Include:
+    - db/migrate/*.rb
+Rails/Output:
+  Enabled: true
+  Include:
+    - app/**/*.rb
+    - config/**/*.rb
+    - db/**/*.rb
+    - lib/**/*.rb
+Rails/OutputSafety:
+  Enabled: true
+Rails/PluralizationGrammar:
+  Enabled: true
+Rails/Presence:
+  Enabled: true
+Rails/Present:
+  Enabled: true
+  NotNilAndNotEmpty: true
+  NotBlank: true
+  UnlessBlank: true
+Rails/ReadWriteAttribute:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+Rails/RedundantAllowNil:
+  Enabled: true
+Rails/RedundantReceiverInWithOptions:
+  Enabled: true
+Rails/ReflectionClassName:
+  Enabled: true
+Rails/RelativeDateConstant:
+  Enabled: true
+Rails/RequestReferer:
+  Enabled: true
+  EnforcedStyle: referer
+Rails/ReversibleMigration:
+  Enabled: true
+  Include:
+    - db/migrate/*.rb
+Rails/SafeNavigation:
+  Enabled: true
+Rails/SaveBang:
+  Enabled: true
+Rails/ScopeArgs:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+Rails/SkipsModelValidations:
+  Enabled: true
+  Blacklist:
+    - decrement!
+    - decrement_counter
+    - increment!
+    - increment_counter
+    - toggle!
+    - touch
+    - update_all
+    - update_attribute
+    - update_column
+    - update_columns
+    - update_counters
+Rails/TimeZone:
+  Enabled: true
+  EnforcedStyle: flexible
+Rails/UniqBeforePluck:
+  Enabled: true
+  EnforcedStyle: conservative
+Rails/UnknownEnv:
+  Enabled: true
+  Environments:
+    - development
+    - test
+    - production
+Rails/Validation:
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+
+Security/Eval:
+  Enabled: true
+Security/JSONLoad:
+  Enabled: true
+Security/MarshalLoad:
+  Enabled: true
+Security/Open:
+  Enabled: true
+Security/YAMLLoad:
+  Enabled: true
+
+Style/Alias:
+  Enabled: true
+  EnforcedStyle: prefer_alias_method
+Style/AndOr:
+  Enabled: true
+  EnforcedStyle: conditionals
+Style/ArrayJoin:
+  Enabled: true
+Style/AsciiComments:
+  Enabled: false
+Style/Attr:
+  Enabled: true
+Style/AutoResourceCleanup:
+  Enabled: true
+Style/BarePercentLiterals:
+  Enabled: true
+  EnforcedStyle: bare_percent
+Style/BeginBlock:
+  Enabled: true
+Style/BlockComments:
+  Enabled: true
+Style/BlockDelimiters:
+  Enabled: true
+  EnforcedStyle: line_count_based
+Style/BracesAroundHashParameters:
+  Enabled: true
+  EnforcedStyle: context_dependent
+Style/CaseEquality:
+  Enabled: true
+Style/CharacterLiteral:
+  Enabled: true
+Style/ClassAndModuleChildren:
+  Enabled: true
+  EnforcedStyle: nested
+Style/ClassCheck:
+  Enabled: true
+  EnforcedStyle: is_a?
+Style/ClassMethods:
+  Enabled: true
+Style/ClassVars:
+  Enabled: true
+Style/CollectionMethods:
+  Enabled: false
+Style/ColonMethodCall:
+  Enabled: true
+Style/ColonMethodDefinition:
+  Enabled: true
+Style/CommandLiteral:
+  Enabled: false
+Style/CommentAnnotation:
+  Enabled: true
+  Keywords:
+    - TODO
+    - FIXME
+    - OPTIMIZE
+    - HACK
+    - REVIEW
+Style/CommentedKeyword:
+  Enabled: true
+Style/ConditionalAssignment:
+  Enabled: true
+  EnforcedStyle: assign_inside_condition
+  SingleLineConditionsOnly: false
+  IncludeTernaryExpressions: false
+Style/ConstantVisibility:
+  Enabled: false
+Style/Copyright:
+  Enabled: false
+Style/DateTime:
+  Enabled: true
+Style/DefWithParentheses:
+  Enabled: true
+Style/Dir:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/DocumentationMethod:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: true
+Style/EachForSimpleLoop:
+  Enabled: true
+Style/EachWithObject:
+  Enabled: true
+Style/EmptyBlockParameter:
+  Enabled: true
+Style/EmptyCaseCondition:
+  Enabled: true
+Style/EmptyElse:
+  Enabled: true
+  EnforcedStyle: both
+Style/EmptyLambdaParameter:
+  Enabled: true
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+Style/EmptyLiteral:
+  Enabled: true
+Style/EmptyMethod:
+  Enabled: true
+  EnforcedStyle: compact
+Style/Encoding:
+  Enabled: true
+Style/EndBlock:
+  Enabled: true
+Style/EvalWithLocation:
+  Enabled: false
+Style/EvenOdd:
+  Enabled: true
+Style/ExpandPathArguments:
+  Enabled: true
+Style/FloatDivision:
+  Enabled: true
+Style/For:
+  Enabled: true
+  EnforcedStyle: each
+Style/FormatString:
+  Enabled: true
+  EnforcedStyle: percent
+Style/FormatStringToken:
+  Enabled: true
+  EnforcedStyle: template
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+Style/GlobalVars:
+  Enabled: true
+Style/GuardClause:
+  Enabled: true
+  MinBodyLength: 1
+Style/HashSyntax:
+  Enabled: true
+  EnforcedStyle: ruby19_no_mixed_keys
+  UseHashRocketsWithSymbolValues: false
+  PreferHashRocketsForNonAlnumEndingSymbols: false
+Style/IdenticalConditionalBranches:
+  Enabled: true
+Style/IfInsideElse:
+  Enabled: true
+Style/IfUnlessModifier:
+  Enabled: true
+Style/IfUnlessModifierOfIfUnless:
+  Enabled: true
+Style/IfWithSemicolon:
+  Enabled: true
+Style/ImplicitRuntimeError:
+  Enabled: true
+Style/InfiniteLoop:
+  Enabled: true
+Style/InlineComment:
+  Enabled: true
+Style/InverseMethods:
+  Enabled: true
+Style/Lambda:
+  Enabled: true
+  EnforcedStyle: line_count_dependent
+Style/LambdaCall:
+  Enabled: true
+  EnforcedStyle: call
+Style/LineEndConcatenation:
+  Enabled: true
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: true
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+Style/MethodDefParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses
+Style/MinMax:
+  Enabled: true
+Style/MissingElse:
+  Enabled: false
+Style/MixinGrouping:
+  Enabled: true
+  EnforcedStyle: separated
+Style/MixinUsage:
+  Enabled: true
+Style/ModuleFunction:
+  Enabled: true
+  EnforcedStyle: module_function
+Style/MultilineBlockChain:
+  Enabled: true
+Style/MultilineIfModifier:
+  Enabled: true
+Style/MethodMissingSuper:
+  Enabled: true
+Style/MissingRespondToMissing:
+  Enabled: true
+Style/MultilineIfThen:
+  Enabled: false
+Style/MultilineMemoization:
+  Enabled: true
+  EnforcedStyle: keyword
+Style/MultilineTernaryOperator:
+  Enabled: true
+Style/MultilineWhenThen:
+  Enabled: true
+Style/MultipleComparison:
+  Enabled: true
+Style/MutableConstant:
+  Enabled: true
+Style/NegatedIf:
+  Enabled: true
+  EnforcedStyle: both
+Style/NegatedUnless:
+  Enabled: true
+  EnforcedStyle: both
+Style/NegatedWhile:
+  Enabled: true
+Style/NestedModifier:
+  Enabled: true
+Style/NestedParenthesizedCalls:
+  Enabled: true
+  Whitelist:
+    - be
+    - be_a
+    - be_an
+    - be_between
+    - be_falsey
+    - be_kind_of
+    - be_instance_of
+    - be_truthy
+    - be_within
+    - eq
+    - eql
+    - end_with
+    - include
+    - match
+    - raise_error
+    - respond_to
+    - start_with
+Style/NestedTernaryOperator:
+  Enabled: true
+Style/Next:
+  Enabled: true
+  EnforcedStyle: skip_modifier_ifs
+Style/NilComparison:
+  Enabled: true
+Style/NonNilCheck:
+  Enabled: true
+Style/Not:
+  Enabled: true
+Style/NumericLiteralPrefix:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: true
+  MinDigits: 5
+  Strict: false
+Style/NumericPredicate:
+  Enabled: true
+  EnforcedStyle: comparison
+  Exclude:
+    - spec/**/*
+Style/OneLineConditional:
+  Enabled: true
+Style/OptionHash:
+  Enabled: true
+  SuspiciousParamNames:
+    - options
+    - opts
+    - args
+    - params
+    - parameters
+Style/OptionalArguments:
+  Enabled: true
+Style/OrAssignment:
+  Enabled: true
+Style/ParallelAssignment:
+  Enabled: true
+Style/ParenthesesAroundCondition:
+  Enabled: true
+  AllowSafeAssignment: true
+Style/PercentLiteralDelimiters:
+  Enabled: true
+Style/PercentQLiterals:
+  Enabled: true
+  EnforcedStyle: lower_case_q
+Style/PerlBackrefs:
+  Enabled: false
+Style/PreferredHashMethods:
+  Enabled: true
+  EnforcedStyle: short
+Style/Proc:
+  Enabled: true
+Style/RaiseArgs:
+  Enabled: true
+  EnforcedStyle: exploded
+Style/RandomWithOffset:
+  Enabled: true
+Style/RedundantBegin:
+  Enabled: true
+Style/RedundantConditional:
+  Enabled: true
+Style/RedundantException:
+  Enabled: false
+Style/RedundantFreeze:
+  Enabled: true
+Style/RedundantParentheses:
+  Enabled: true
+Style/RedundantReturn:
+  Enabled: true
+  AllowMultipleReturnValues: false
+Style/RedundantSelf:
+  Enabled: true
+Style/RedundantSortBy:
+  Enabled: true
+Style/RegexpLiteral:
+  Enabled: true
+  EnforcedStyle: percent_r
+  AllowInnerSlashes: true
+Style/RescueModifier:
+  Enabled: true
+Style/RescueStandardError:
+  Enabled: true
+  EnforcedStyle: explicit
+Style/ReturnNil:
+  Enabled: true
+  EnforcedStyle: return
+Style/SafeNavigation:
+  Enabled: true
+  ConvertCodeThatCanStartToReturnNil: true
+  Whitelist:
+    - present?
+    - blank?
+    - presence
+    - try
+    - try!
+Style/Sample:
+  Enabled: true
+Style/SelfAssignment:
+  Enabled: true
+Style/Semicolon:
+  Enabled: true
+  AllowAsExpressionSeparator: false
+Style/Send:
+  Enabled: true
+Style/SignalException:
+  Enabled: true
+  EnforcedStyle: only_raise
+Style/SingleLineBlockParams:
+  Enabled: true
+Style/SingleLineMethods:
+  Enabled: true
+  AllowIfMethodIsEmpty: true
+Style/SpecialGlobalVars:
+  Enabled: true
+  EnforcedStyle: use_english_names
+Style/StabbyLambdaParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses
+Style/StderrPuts:
+  Enabled: true
+Style/StringHashKeys:
+  Enabled: true
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: true
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
+Style/StringMethods:
+  Enabled: true
+Style/Strip:
+  Enabled: true
+Style/StructInheritance:
+  Enabled: true
+Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: percent
+  MinSize: 0
+Style/SymbolLiteral:
+  Enabled: true
+Style/SymbolProc:
+  Enabled: true
+Style/TernaryParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses_when_complex
+  AllowSafeAssignment: true
+Style/TrailingBodyOnClass:
+  Enabled: true
+Style/TrailingBodyOnMethodDefinition:
+  Enabled: true
+Style/TrailingBodyOnModule:
+  Enabled: true
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+Style/TrailingMethodEndStatement:
+  Enabled: true
+Style/TrailingUnderscoreVariable:
+  Enabled: false
+Style/TrivialAccessors:
+  Enabled: true
+  ExactNameMatch: true
+  AllowPredicates: true
+  AllowDSLWriters: false
+  IgnoreClassMethods: false
+  Whitelist:
+    - to_ary
+    - to_a
+    - to_c
+    - to_enum
+    - to_h
+    - to_hash
+    - to_i
+    - to_int
+    - to_io
+    - to_open
+    - to_path
+    - to_proc
+    - to_r
+    - to_regexp
+    - to_str
+    - to_s
+    - to_sym
+Style/UnlessElse:
+  Enabled: true
+Style/UnneededCapitalW:
+  Enabled: true
+Style/UnneededInterpolation:
+  Enabled: true
+Style/UnneededPercentQ:
+  Enabled: true
+Style/UnneededSort:
+  Enabled: true
+Style/UnpackFirst:
+  Enabled: true
+Style/VariableInterpolation:
+  Enabled: true
+Style/WhenThen:
+  Enabled: true
+Style/WhileUntilDo:
+  Enabled: true
+Style/WhileUntilModifier:
+  Enabled: true
+Style/WordArray:
+  Enabled: true
+  EnforcedStyle: percent
+  MinSize: 0
+Style/YodaCondition:
+  Enabled: true
+  EnforcedStyle: forbid_for_all_comparison_operators
+Style/ZeroLengthPredicate:
+  Enabled: true
+
+Bundler/DuplicatedGem:
+  Enabled: true
+Bundler/InsecureProtocolSource:
+  Enabled: true
+Bundler/OrderedGems:
+  Enabled: false
+  TreatCommentsAsGroupSeparators: false
+
+Gemspec/DuplicatedAssignment:
+  Enabled: true
+Gemspec/OrderedDependencies:
+  Enabled: false
+Gemspec/RequiredRubyVersion:
+  Enabled: true
+Gemspec/RubyVersionGlobalsUsage:
+  Enabled: true
+
+RSpec/AlignRightLetBrace:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: true
+RSpec/AroundBlock:
+  Enabled: true
+RSpec/Be:
+  Enabled: true
+RSpec/BeEql:
+  Enabled: true
+RSpec/BeforeAfterAll:
+  Enabled: true
+RSpec/ContextWording:
+  Enabled: true
+RSpec/DescribeClass:
+  Enabled: true
+RSpec/DescribeMethod:
+  Enabled: false
+RSpec/DescribeSymbol:
+  Enabled: true
+RSpec/DescribedClass:
+  Enabled: true
+  SkipBlocks: false
+  EnforcedStyle: described_class
+RSpec/Dialect:
+  Enabled: false
+RSpec/EmptyExampleGroup:
+  Enabled: true
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: true
+RSpec/EmptyLineAfterSubject:
+  Enabled: true
+RSpec/ExampleLength:
+  Enabled: true
+  Max: 6
+RSpec/ExampleWithoutDescription:
+  Enabled: true
+  EnforcedStyle: single_line_only
+RSpec/ExampleWording:
+  Enabled: true
+RSpec/ExpectActual:
+  Enabled: true
+  Exclude:
+    - spec/routing/**/*
+RSpec/ExpectChange:
+  Enabled: true
+  EnforcedStyle: block
+RSpec/ExpectInHook:
+  Enabled: true
+RSpec/ExpectOutput:
+  Enabled: true
+RSpec/FilePath:
+  Enabled: true
+  IgnoreMethods: true
+RSpec/Focus:
+  Enabled: true
+RSpec/HookArgument:
+  Enabled: true
+  EnforcedStyle: implicit
+RSpec/HooksBeforeExamples:
+ Enabled: true
+RSpec/ImplicitBlockExpectation:
+ Enabled: true
+RSpec/ImplicitExpect:
+  Enabled: true
+  EnforcedStyle: is_expected
+RSpec/InstanceSpy:
+  Enabled: true
+RSpec/InstanceVariable:
+  Enabled: true
+  AssignmentOnly: false
+RSpec/InvalidPredicateMatcher:
+  Enabled: true
+RSpec/ItBehavesLike:
+  Enabled: true
+  EnforcedStyle: it_behaves_like
+RSpec/IteratedExpectation:
+  Enabled: true
+RSpec/LeadingSubject:
+  Enabled: false
+RSpec/LeakyConstantDeclaration:
+ Enabled: true
+RSpec/LetBeforeExamples:
+  Enabled: true
+RSpec/LetSetup:
+  Enabled: true
+RSpec/MessageChain:
+  Enabled: false
+RSpec/MessageExpectation:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: true
+  EnforcedStyle: have_received
+RSpec/MultipleDescribes:
+  Enabled: true
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleSubjects:
+  Enabled: true
+RSpec/NamedSubject:
+  Enabled: true
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 8
+RSpec/NotToNot:
+  Enabled: true
+  EnforcedStyle: not_to
+RSpec/OverwritingSetup:
+  Enabled: false
+RSpec/Pending:
+  Enabled: false
+RSpec/PredicateMatcher:
+  Enabled: true
+  Strict: false
+  EnforcedStyle: inflected
+RSpec/RepeatedDescription:
+  Enabled: true
+RSpec/RepeatedExample:
+  Enabled: true
+RSpec/ReturnFromStub:
+  Enabled: true
+  EnforcedStyle: and_return
+RSpec/ScatteredLet:
+  Enabled: true
+RSpec/ScatteredSetup:
+  Enabled: true
+RSpec/SharedContext:
+  Enabled: true
+RSpec/SharedExamples:
+  Enabled: true
+RSpec/SingleArgumentMessageChain:
+  Enabled: true
+RSpec/SubjectStub:
+  Enabled: true
+RSpec/VerifiedDoubles:
+  Enabled: true
+  IgnoreSymbolicNames: false
+RSpec/VoidExpect:
+  Enabled: true
+RSpec/Yield:
+  Enabled: true
+
+FactoryBot/CreateList:
+  Enabled: true
+  EnforcedStyle: create_list
+FactoryBot/AttributeDefinedStatically:
+  Enabled: true
+
+Capybara/CurrentPathExpectation:
+  Enabled: true
+Capybara/FeatureMethods:
+  Enabled: false
