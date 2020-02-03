@@ -16,7 +16,7 @@ require "conjunction/naming_convention"
 require "conjunction/junction"
 
 module Conjunction
-  include Spicerack::Configurable::ConfigDelegation
+  include Directive::ConfigDelegation
   delegates_to_configuration
 
   class Error < StandardError; end

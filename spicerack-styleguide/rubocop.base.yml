@@ -584,6 +584,7 @@ Rails/Exit:
   Enabled: true
 Rails/FilePath:
   Enabled: true
+  EnforcedStyle: arguments
 Rails/FindBy:
   Enabled: true
   Include:

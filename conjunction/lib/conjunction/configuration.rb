@@ -2,7 +2,7 @@
 
 module Conjunction
   module Configuration
-    extend Spicerack::Configurable
+    extend Directive
 
     configuration_options do
       option :nexus_use_disables_implicit_lookup, default: false

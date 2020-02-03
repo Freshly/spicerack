@@ -54,6 +54,16 @@ RSpec.describe Technologic::Logger do
 
     let(:formatted_value) { Faker::Lorem.word }
 
+    shared_context "when the value is a hash" do
+      let(:value) { { keys.first => object_0, keys.last => object_1 } }
+      let(:keys) { Faker::Lorem.words(2).map(&:to_sym) }
+      let(:object_0) { double(id: formatted_value_0) } # rubocop:disable RSpec/VerifiedDoubles
+      let(:object_1) { double(to_log_string: formatted_value_1) } # rubocop:disable RSpec/VerifiedDoubles
+      let(:formatted_value_0) { Faker::Lorem.unique.word }
+      let(:formatted_value_1) { Faker::Lorem.unique.word }
+      let(:expected_log_hash) { { keys.first => formatted_value_0, keys.last => formatted_value_1 } }
+    end
+
     context "when value responds to #to_log_string" do
       let(:value) { double(to_log_string: formatted_value) } # rubocop:disable RSpec/VerifiedDoubles
 
@@ -78,6 +88,12 @@ RSpec.describe Technologic::Logger do
       it { is_expected.to eq formatted_value }
     end
 
+    context "when value response to #transform_values" do
+      include_context "when the value is a hash"
+
+      it { is_expected.to eq expected_log_hash }
+    end
+
     context "when value responds to #map" do
       let(:value) { [ object_0, object_1 ] }
       let(:object_0) { double(id: formatted_value_0) } # rubocop:disable RSpec/VerifiedDoubles
@@ -86,6 +102,12 @@ RSpec.describe Technologic::Logger do
       let(:formatted_value_1) { Faker::Lorem.unique.word }
 
       it { is_expected.to eq [ formatted_value_0, formatted_value_1 ] }
+
+      context "when value response to #transform_values" do
+        include_context "when the value is a hash"
+
+        it { is_expected.to eq expected_log_hash }
+      end
     end
 
     context "without a special case" do

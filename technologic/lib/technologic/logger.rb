@@ -18,7 +18,8 @@ module Technologic
         return value.to_s if value.is_a?(Enumerator)
         return value if value.is_a?(Numeric)
         return value.id if value.respond_to?(:id)
-        return value.map { |mappable_value| format_value_for_log(mappable_value) } if value.respond_to?(:map)
+        return value.transform_values { |element| format_value_for_log(element) } if value.respond_to?(:transform_values)
+        return value.map { |element| format_value_for_log(element) } if value.respond_to?(:map)
 
         value.to_s
       end

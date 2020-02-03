@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.22.2
+
+*Release Date*: 1/28/2020
+
+- No changes
+
+## v0.22.1 [Yanked]
+
+*Release Date*: 1/28/2020
+
+- No changes
+
+## v0.22.0
+
+*Release Date*: 1/28/2020
+
+- Preserve hash formatting instead of converting to arrays ([#346](https://github.com/Freshly/spicerack/pull/346))
+
 ## v0.21.0
 
 *Release Date*: 1/10/2020

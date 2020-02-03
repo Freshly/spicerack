@@ -7,11 +7,11 @@ require "directive/version"
 Gem::Specification.new do |spec|
   spec.name          = "directive"
   spec.version       = Directive::VERSION
-  spec.authors       = ["Allen Rettberg"]
+  spec.authors       = [ "Allen Rettberg" ]
   spec.email         = [ "allen.rettberg@freshly.com" ]
 
   spec.summary       = "Gem configuration made simple"
-  spec.description   = "An easy, self-documenting gem configuration framework"
+  spec.description   = "Easily create rich, self-documenting gem configuration"
   spec.homepage      = "https://github.com/Freshly/spicerack/tree/master/directive"
   spec.license       = "MIT"
 
