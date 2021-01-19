@@ -29,9 +29,11 @@ module Technologic
   SEVERITIES = %i[debug info warn error fatal].freeze
   EXCEPTION_SEVERITIES = %i[error fatal].freeze
 
+  ACTIVEJOB_WORKAROUND_FIRST_VERSION = Gem::Version.new("6.1.0")
+
   included do
-    delegate :instrument, :surveil, to: :class
-    protected :instrument, :surveil
+    delegate :_tl_instrument, :surveil, to: :class
+    protected :_tl_instrument, :surveil
 
     SEVERITIES.each do |severity|
       delegate severity, to: :class
@@ -46,14 +48,26 @@ module Technologic
     end
   end
 
-  class_methods do
-    def instrument(severity, event, **data, &block)
-      ActiveSupport::Notifications.instrument("#{event}.#{name}.#{severity}", data, &block).tap do
-        # If a block was defined, :instrument will return the value of the block.
-        # Otherwise, :instrument will return nil, since it didn't do anything.
-        # Returning true here allows us to do fun things like `info :subscription_created and return subscription`
-        return true unless block_given?
-      end
+  protected
+
+  # DEP-2021-01-14
+  # Remove this method
+  def instrument(*args, **opts, &block)
+    # Targeted workaround for ActiveJob#instrument in Rails 6.1+
+    return super if defined?(ActiveJob) && self.class <= ActiveJob::Base && ActiveJob.version >= ACTIVEJOB_WORKAROUND_FIRST_VERSION
+
+    ActiveSupport::Deprecation.warn("Technologic#instrument is deprecated. Instead, use the corresponding severity-level convenience method (#info, #error etc)")
+
+    _tl_instrument(*args, **opts, &block)
+  end
+
+  module ClassMethods
+    # DEP-2021-01-14
+    # Remove this method
+    def instrument(*args, **opts, &block)
+      ActiveSupport::Deprecation.warn("Technologic.instrument is deprecated. Instead, use the corresponding severity-level convenience method (#info, #error etc)")
+
+      _tl_instrument(*args, **opts, &block)
     end
 
     def surveil(event, severity: :info, **data, &block)
@@ -64,13 +78,13 @@ module Technologic
     end
 
     SEVERITIES.each do |severity|
-      define_method(severity) { |event, **data, &block| instrument(severity, event, **data, &block) }
+      define_method(severity) { |event, **data, &block| _tl_instrument(severity, event, **data, &block) }
     end
 
     EXCEPTION_SEVERITIES.each do |severity|
       define_method("#{severity}!") do |exception = StandardError, message = nil, **data, &block|
         if exception.is_a?(Exception)
-          instrument(
+          _tl_instrument(
             severity,
             exception.class.name.demodulize,
             **{
@@ -86,6 +100,17 @@ module Technologic
           instrument severity, exception.name.demodulize, message: message, **data, &block
           raise exception, message
         end
+      end
+    end
+
+    protected
+
+    def _tl_instrument(severity, event, **data, &block)
+      ActiveSupport::Notifications.instrument("#{event}.#{name}.#{severity}", data, &block).tap do
+        # If a block was defined, :instrument will return the value of the block.
+        # Otherwise, :instrument will return nil, since it didn't do anything.
+        # Returning true here allows us to do fun things like `info :subscription_created and return subscription`
+        return true unless block_given?
       end
     end
   end

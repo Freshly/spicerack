@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# DEP-2021-01-14
+# Remove file with deprecation
+
 RSpec.describe Technologic do
   subject(:example_instance) { example_class.new }
 
@@ -49,20 +52,20 @@ RSpec.describe Technologic do
 
   describe ".instrument" do
     it_behaves_like "it's instrumented with severity" do
-      before { example_class.__send__(severity, event, **data, &block) }
+      before { example_class.__send__(:instrument, severity, event, **data, &block) }
     end
 
     describe "return value" do
       include_context "with instrumentation data having a random severity"
 
       context "when block returns a value" do
-        subject { example_class.__send__(severity, event, **data, &block) }
+        subject { example_class.__send__(:instrument, severity, event, **data, &block) }
 
         it { is_expected.to eq block_value }
       end
 
       context "when block returns nil" do
-        subject { example_class.__send__(severity, event, **data, &block) }
+        subject { example_class.__send__(:instrument, severity, event, **data, &block) }
 
         let(:block_value) { nil }
 
@@ -70,7 +73,7 @@ RSpec.describe Technologic do
       end
 
       context "when no block is given" do
-        subject { example_class.__send__(severity, event, **data) }
+        subject { example_class.__send__(:instrument, severity, event, **data) }
 
         it { is_expected.to eq true }
       end

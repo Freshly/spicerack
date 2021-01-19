@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+
+- Fix `instrument` method collision in ActiveJob 6.1+ ([#431](https://github.com/Freshly/spicerack/pull/431))
+
 ## v0.25.3
 
 *Release Date*: 12/23/2020
