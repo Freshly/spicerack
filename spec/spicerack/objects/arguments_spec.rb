@@ -4,13 +4,14 @@ RSpec.describe Spicerack::Objects::Arguments, type: :module do
   include_context "with an example input object"
 
   describe ".argument" do
-    subject(:define_argument) { example_input_object_class.__send__(:argument, argument, allow_nil: allow_nil) }
+    subject(:define_argument) { example_input_object_class.__send__(:argument, argument, allow_nil: allow_nil, output: output) }
 
     let(:argument) { Faker::Lorem.word.to_sym }
     let(:argument_value) do
       { allow_nil: allow_nil }
     end
     let(:allow_nil) { true }
+    let(:output) { false }
 
     before { allow(example_input_object_class).to receive(:define_attribute).and_call_original }
 
@@ -31,15 +32,43 @@ RSpec.describe Spicerack::Objects::Arguments, type: :module do
       it_behaves_like "an argument is defined"
     end
 
-    context "with allow_nil" do
+    context "with allow_nil option" do
       context "with allow_nil: true" do
         it_behaves_like "an argument is defined"
       end
 
       context "with allow_nil: false" do
-        let(:allow_nil) { true }
+        let(:allow_nil) { false }
 
         it_behaves_like "an argument is defined"
+      end
+    end
+
+    context "with output option" do
+      context "when _outputs is defined" do
+        before { example_input_object_class.__send__(:class_attribute, :_outputs, instance_writer: false, default: []) }
+
+        context "with output:true" do
+          let(:output) { true }
+
+          it "adds to _outputs" do
+            expect { define_argument }.to change { example_input_object_class._outputs }.from([]).to([argument])
+          end
+        end
+
+        context "with output:false" do
+          it "does not add to _outputs" do
+            expect { define_argument }.to_not change { example_input_object_class._outputs }.from([])
+          end
+        end
+      end
+
+      context "when _outputs is undefined and with output:true" do
+        let(:output) { true }
+
+        it "does not raise undefined error" do
+          expect { define_argument }.to_not raise_error
+        end
       end
     end
   end

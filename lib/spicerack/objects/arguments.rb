@@ -28,8 +28,9 @@ module Spicerack
 
         private
 
-        def argument(argument, allow_nil: true)
+        def argument(argument, output: false, allow_nil: true)
           _arguments[argument] = { allow_nil: allow_nil }
+          _outputs << argument if output && respond_to?(:_outputs)
           define_attribute argument
         end
       end
