@@ -2,6 +2,8 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
+### Substance - [see changes](substance/CHANGELOG.md#Upcoming)
+
 ## v0.26.0.2
 
 *Release Date*: 4/28/2021
