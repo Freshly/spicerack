@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "active_model"
+
 require_relative "input_object"
 
 module Substance

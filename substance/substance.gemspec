@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["README.md", "LICENSE.txt", ".yardopts", "lib/**/{*,.[a-z]*}"]
   spec.require_paths = %w[lib]
 
+  spec.add_runtime_dependency "activemodel", rails_version
   spec.add_runtime_dependency "activesupport", rails_version
   spec.add_runtime_dependency "short_circu_it", Substance::VERSION
   spec.add_runtime_dependency "tablesalt", Substance::VERSION
