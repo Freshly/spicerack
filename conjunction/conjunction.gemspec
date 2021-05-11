@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "activesupport", rails_version
   spec.add_runtime_dependency "directive", Conjunction::VERSION
-  spec.add_runtime_dependency "spicerack", Conjunction::VERSION
 
   spec.add_dependency "activemodel", rails_version
 end
