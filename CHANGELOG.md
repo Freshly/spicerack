@@ -2,6 +2,8 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
+### Conjunction - [see changes](conjunction/CHANGELOG.md#Upcoming)
+
 ## v0.26.0.3
 
 *Release Date*: 5/4/2021
