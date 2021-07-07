@@ -13,7 +13,6 @@ module Tablesalt
     extend ActiveSupport::Concern
     extend Management
 
-    WRITTEN_VARIABLES_THREAD_KEY = :__tablesalt_thread_accessor_written_variable_names__
     STORE_THREAD_KEY = :__tablesalt_thread_accessor_store__
 
     module ClassMethods
