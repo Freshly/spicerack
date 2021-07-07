@@ -69,8 +69,8 @@ RSpec.describe Substance::RootObject do
       context "with several events" do
         subject(:define_callbacks_with_handler) { example_class.__send__(:define_callbacks_with_handler, event1, event2) }
 
-        let(:event1) { Faker::Internet.domain_word.underscore.to_sym }
-        let(:event2) { Faker::Internet.domain_word.underscore.to_sym }
+        let(:event1) { Faker::Internet.unique.domain_word.underscore.to_sym }
+        let(:event2) { Faker::Internet.unique.domain_word.underscore.to_sym }
 
         it_behaves_like "callbacks and handler are defined for event" do
           let(:expected_events) { [ event1, event2 ] }

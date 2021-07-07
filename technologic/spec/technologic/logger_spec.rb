@@ -6,7 +6,7 @@ RSpec.describe Technologic::Logger do
 
     let(:severity) { Faker::Internet.domain_word.to_sym }
     let(:event) { instance_double(Technologic::Event, data: event_data) }
-    let(:event_data) { Hash[*Faker::Lorem.unique.words(number: 2 * rand(1..2))] }
+    let(:event_data) { Hash[*(:a..:z).to_a.shuffle[1..(2 * rand(1..2))]] }
     let(:data_keys) { event_data.keys }
     let(:data_values) { event_data.values }
     let(:expected_log_data) do
@@ -43,7 +43,6 @@ RSpec.describe Technologic::Logger do
         allow(logger).to receive(severity).with(no_args) { |&block| @yield = block.yield }
       end
 
-      # TODO: Flake
       it "logs formatted data" do
         expect { log }.to change { @yield }.from(nil).to(expected_log_data) # rubocop:disable RSpec/InstanceVariable
       end
