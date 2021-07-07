@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "active_support/concern"
-require "set"
 
 require_relative "thread_accessor/management"
 require_relative "thread_accessor/rack_middleware"
