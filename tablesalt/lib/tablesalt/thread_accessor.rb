@@ -5,6 +5,7 @@ require "active_support/core_ext/module/delegation"
 
 require_relative "thread_accessor/management"
 require_relative "thread_accessor/rack_middleware"
+require_relative "thread_accessor/store_instance"
 require_relative "thread_accessor/thread_store"
 
 # WARNING: This module is still in beta mode and will likely change significantly soon. Tread carefully...
@@ -15,15 +16,11 @@ module Tablesalt
 
     STORE_THREAD_KEY = :__tablesalt_thread_accessor_store__
 
-    delegate :_thread_accessor_namespace__, :__thread_accessor_store_instance__, to: :class
+    include StoreInstance
+
 
     module ClassMethods
-      # Internal method used for thread store scoping
-      def __thread_accessor_namespace__; end
-
-      def __thread_accessor_store_instance__
-        ThreadAccessor.store(__thread_accessor_namespace__)
-      end
+      include StoreInstance
 
       private
 

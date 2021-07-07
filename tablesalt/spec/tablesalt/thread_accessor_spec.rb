@@ -8,6 +8,9 @@ RSpec.describe Tablesalt::ThreadAccessor do
   let(:thread_key) { Faker::Lorem.sentence.parameterize.underscore.to_sym }
   let(:private?) { true }
 
+  it { expect(example_class.private_methods).to include :__thread_accessor_namespace__ }
+  it { expect(example_class.private_methods).to include :__thread_accessor_store_instance__ }
+
   describe ".thread_reader" do
     before { example_class.__send__(:thread_reader, method, thread_key, private: private?) }
 
