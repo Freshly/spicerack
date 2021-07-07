@@ -50,11 +50,11 @@ RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **opti
   private
 
   def with_value_on_thread
-    Thread.current[thread_key] = stubbed_value
+    Tablesalt::ThreadAccessor.store[thread_key] = stubbed_value
 
     yield
 
-    Thread.current[thread_key] = nil
+    Tablesalt::ThreadAccessor.store[thread_key] = nil
   end
 
   def subject_module
@@ -62,19 +62,12 @@ RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **opti
   end
 
   def klass
-    @klass ||=
-      case subject
-      when Class
-        subject
-      when Module
-        Class.new(subject)
-      else
-        subject.class
-      end
+    @klass ||= subject.is_a?(Module) ? subject : subject.class
   end
 
   def instance
     return subject unless subject.is_a?(Module)
+    return subject unless subject.respond_to?(:new)
 
     @instance ||= begin
       allow(klass).to receive(:initialize).with(any_args)
