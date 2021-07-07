@@ -15,6 +15,8 @@ module Tablesalt
 
     STORE_THREAD_KEY = :__tablesalt_thread_accessor_store__
 
+    delegate :_thread_accessor_namespace__, :__thread_accessor_store_instance__, to: :class
+
     module ClassMethods
       # Internal method used for thread store scoping
       def __thread_accessor_namespace__; end
