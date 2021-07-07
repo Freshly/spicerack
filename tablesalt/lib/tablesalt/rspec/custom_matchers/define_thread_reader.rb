@@ -50,11 +50,11 @@ RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **opti
   private
 
   def with_value_on_thread
-    Thread.current[thread_key] = stubbed_value
+    Tablesalt::ThreadAccessor.store[thread_key] = stubbed_value
 
     yield
 
-    Thread.current[thread_key] = nil
+    Tablesalt::ThreadAccessor.store[thread_key] = nil
   end
 
   def subject_module

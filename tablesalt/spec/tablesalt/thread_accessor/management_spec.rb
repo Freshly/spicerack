@@ -10,64 +10,13 @@ RSpec.describe Tablesalt::ThreadAccessor::Management do
   end
   let(:sample_value) { Faker::ChuckNorris.fact }
 
-  describe ".register_written_thread_variable" do
-    subject { Thread.current[example_class::WRITTEN_VARIABLES_THREAD_KEY] }
+  describe ".store" do
+    subject { Tablesalt::ThreadAccessor.store }
 
-    let(:name) { Faker::Lorem.unique.word }
-
-    context "when called once" do
-      before { Tablesalt::ThreadAccessor.register_written_thread_variable(name) }
-
-      it { is_expected.to eq Set[name.to_sym] }
-    end
-
-    context "when called twice with the same name" do
-      before do
-        Tablesalt::ThreadAccessor.register_written_thread_variable(name)
-        Tablesalt::ThreadAccessor.register_written_thread_variable(name)
-      end
-
-      it { is_expected.to eq Set[name.to_sym] }
-    end
-
-    context "when called twice with different names" do
-      let(:name_2) { Faker::Lorem.unique.word }
-
-      before do
-        Tablesalt::ThreadAccessor.register_written_thread_variable(name)
-        Tablesalt::ThreadAccessor.register_written_thread_variable(name_2)
-      end
-
-      it { is_expected.to eq Set[name.to_sym, name_2.to_sym] }
-    end
-  end
-
-  describe ".clear_thread_variables!" do
-    subject { Thread.current[example_class::WRITTEN_VARIABLES_THREAD_KEY] }
-
-    before { Tablesalt::ThreadAccessor.clear_thread_variables! }
-
-    context "when nothing is tracked on thread" do
-      it { is_expected.to eq nil }
-    end
-
-    context "when one name is set on thread" do
-      before do
-        Tablesalt::ThreadAccessor.register_written_thread_variable(Faker::Lorem.word)
-        Tablesalt::ThreadAccessor.clear_thread_variables!
-      end
-
-      it { is_expected.to eq nil }
-    end
-
-    context "when multiple names are set on thread" do
-      before do
-        2.times { Tablesalt::ThreadAccessor.register_written_thread_variable(Faker::Lorem.unique.word) }
-        Tablesalt::ThreadAccessor.clear_thread_variables!
-      end
-
-      it { is_expected.to eq nil }
-    end
+    it { is_expected.to eq({}) }
+    it { is_expected.to be_a Tablesalt::ThreadAccessor::ThreadStore }
+    it { is_expected.to eq Tablesalt::ThreadAccessor::ThreadStore.new }
+    it { is_expected.to equal Tablesalt::ThreadAccessor.store }
   end
 
   describe ".with_isolated_thread_context" do

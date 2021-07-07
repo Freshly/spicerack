@@ -5,6 +5,7 @@ require "set"
 
 require_relative "thread_accessor/management"
 require_relative "thread_accessor/rack_middleware"
+require_relative "thread_accessor/thread_store"
 
 # WARNING: This module is still in beta mode and will likely change significantly soon. Tread carefully...
 module Tablesalt
@@ -37,8 +38,8 @@ module Tablesalt
       # @param thread_key [String, Symbol] The key to read from Thread.current
       # @option :private [Boolean] If true, both defined methods will be private. Default: true
       def thread_reader(method, thread_key, **options)
-        define_method(method) { Thread.current[thread_key] }
-        define_singleton_method(method) { Thread.current[thread_key] }
+        define_method(method) { ThreadAccessor.store[thread_key] }
+        define_singleton_method(method) { ThreadAccessor.store[thread_key] }
 
         return unless options.fetch(:private, true)
 
@@ -72,15 +73,8 @@ module Tablesalt
       def thread_writer(method, thread_key, **options)
         method_name = "#{method}="
 
-        define_method(method_name) do |value|
-          ThreadAccessor.register_written_thread_variable(thread_key)
-          Thread.current[thread_key] = value
-        end
-
-        define_singleton_method(method_name) do |value|
-          ThreadAccessor.register_written_thread_variable(thread_key)
-          Thread.current[thread_key] = value
-        end
+        define_method(method_name) { |value| ThreadAccessor.store[thread_key] = value }
+        define_singleton_method(method_name) { |value| ThreadAccessor.store[thread_key] = value }
 
         return unless options.fetch(:private, true)
 

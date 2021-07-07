@@ -3,21 +3,8 @@
 module Tablesalt
   module ThreadAccessor
     module Management
-      def written_thread_variables
-        Thread.current[self::WRITTEN_VARIABLES_THREAD_KEY]
-      end
-
-      def register_written_thread_variable(name)
-        Thread.current[self::WRITTEN_VARIABLES_THREAD_KEY] ||= Set.new
-        Thread.current[self::WRITTEN_VARIABLES_THREAD_KEY] << name.to_sym
-      end
-
-      def clear_thread_variables!
-        Thread.current[self::WRITTEN_VARIABLES_THREAD_KEY]&.each do |var|
-          Thread.current[var] = nil
-        end
-
-        Thread.current[self::WRITTEN_VARIABLES_THREAD_KEY] = nil
+      def store
+        Thread.current[Tablesalt::ThreadAccessor::STORE_THREAD_KEY] ||= ThreadStore.new
       end
 
       # Cleans up thread variables written inside the yielded block
@@ -25,17 +12,17 @@ module Tablesalt
       # @param :logger [Logger] Optional; A logger instance that implements the method :warn to send warning messages to
       # @yield block Yields no
       def with_isolated_thread_context(logger: nil)
-        if ThreadAccessor.written_thread_variables.present?
+        if store.present?
           if logger.nil?
-            puts "WARNING: ThreadAccessor variables set outside ThreadAccessor context: #{ThreadAccessor.written_thread_variables.join(", ")}"
+            puts "WARNING: ThreadAccessor variables set outside ThreadAccessor context: #{store.keys.join(", ")}"
           else
-            logger.warn("ThreadAccessor variables set outside ThreadAccessor context: #{ThreadAccessor.written_thread_variables.join(", ")}")
+            logger.warn("ThreadAccessor variables set outside ThreadAccessor context: #{store.keys.join(", ")}")
           end
         end
 
         yield
       ensure
-        ThreadAccessor.clear_thread_variables!
+        store.clear
       end
     end
   end

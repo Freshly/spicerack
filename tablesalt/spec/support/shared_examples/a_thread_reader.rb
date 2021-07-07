@@ -19,9 +19,9 @@ RSpec.shared_examples "a thread reader" do
   context "with value set on thread" do
     subject { receiver.__send__(method) }
 
-    before { Thread.current[thread_key] = value }
+    before { Tablesalt::ThreadAccessor.store[thread_key] = value }
 
-    after { Thread.current[thread_key] = nil }
+    after { Tablesalt::ThreadAccessor.store[thread_key] = nil }
 
     it { is_expected.to eq value }
 
