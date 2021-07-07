@@ -23,7 +23,7 @@ RSpec.describe Tablesalt::ThreadAccessor::ThreadStore do
 
     context "when something is set in the hash" do
       let(:key) { Faker::Lorem.word }
-      let(:value) {Faker::ChuckNorris.fact }
+      let(:value) { Faker::ChuckNorris.fact }
 
       let(:expected_hash) { { key => value } }
 

@@ -62,19 +62,12 @@ RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **opti
   end
 
   def klass
-    @klass ||=
-      case subject
-      when Class
-        subject
-      when Module
-        Class.new(subject)
-      else
-        subject.class
-      end
+    @klass ||= subject.is_a?(Module) ? subject : subject.class
   end
 
   def instance
     return subject unless subject.is_a?(Module)
+    return subject unless subject.respond_to?(:new)
 
     @instance ||= begin
       allow(klass).to receive(:initialize).with(any_args)
