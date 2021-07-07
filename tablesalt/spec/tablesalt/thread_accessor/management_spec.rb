@@ -19,13 +19,13 @@ RSpec.describe Tablesalt::ThreadAccessor::Management do
     it { is_expected.to equal Tablesalt::ThreadAccessor.store }
   end
 
-  describe ".with_isolated_thread_context" do
+  describe ".clean_thread_context" do
     before do
       allow(example_class).to receive(:current_balderdash=).and_call_original
     end
 
     it "clears the variables written inside the block" do
-      Tablesalt::ThreadAccessor.with_isolated_thread_context do
+      Tablesalt::ThreadAccessor.clean_thread_context do
         example_class.current_balderdash = sample_value
 
         expect(example_class.current_balderdash).to eq sample_value

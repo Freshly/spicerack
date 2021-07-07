@@ -11,7 +11,7 @@ module Tablesalt
       #
       # @param :logger [Logger] Optional; A logger instance that implements the method :warn to send warning messages to
       # @yield block Yields no
-      def with_isolated_thread_context(logger: nil)
+      def clean_thread_context(logger: nil)
         if store.present?
           if logger.nil?
             puts "WARNING: ThreadAccessor variables set outside ThreadAccessor context: #{store.keys.join(", ")}"
