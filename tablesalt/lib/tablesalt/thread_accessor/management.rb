@@ -7,10 +7,10 @@ module Tablesalt
         Thread.current[Tablesalt::ThreadAccessor::STORE_THREAD_KEY] ||= ThreadStore.new
       end
 
-      # Cleans up thread variables written inside the yielded block
+      # Cleans up ThreadAccessor state after given block executes
       #
       # @param :logger [Logger] Optional; A logger instance that implements the method :warn to send warning messages to
-      # @yield block Yields no
+      # @yield Required; Yields no variables to the given block
       def clean_thread_context(logger: nil)
         if store.present?
           if logger.nil?
