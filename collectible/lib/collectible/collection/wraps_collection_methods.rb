@@ -2,9 +2,13 @@
 
 module Collectible
   module Collection
+    #
+    # @todo Document this
+    #
     module WrapsCollectionMethods
       extend ActiveSupport::Concern
 
+      # :nodoc:
       PROXY_MODULE_NAME = "WrapCollectionMethods"
 
       included do
@@ -23,6 +27,7 @@ module Collectible
         yield
       end
 
+      # rubocop:disable Metrics/BlockLength
       class_methods do
         private
 
@@ -74,6 +79,7 @@ module Collectible
           end
         end
       end
+      # rubocop:enable Metrics/BlockLength
     end
   end
 end

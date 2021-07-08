@@ -2,6 +2,6 @@
 
 require_relative "../../shared/spec_helper"
 
-require_relative "support/shared_context/with_an_example_collection"
+Dir[File.join(File.expand_path(__dir__), 'support/**/*.rb')].each { |f| require f }
 
 require "collectible"

@@ -10,11 +10,30 @@ require "tablesalt/uses_hash_for_equality"
 
 require "collectible/version"
 
-require "collectible/collection_base"
+require "collectible/collection"
 
+#
+# Top level namespace containing all Collectible specific classes and definitions
+#
 module Collectible
-  class ItemNotAllowedError < StandardError; end
+  #
+  # A wrapper for gem specific errors
+  #
+  class Error < StandardError; end
+  #
+  # An error used when an item is not allowed in a collection. For example
+  # when a proc validation of an item returned false
+  # @see Collectible::Collection::Validators::WithProc
+  #
+  class ItemNotAllowedError < Error; end
+  #
+  # An error raised when some of the elements being added into collection
+  # does not match the required type
+  #
   class ItemTypeMismatchError < ItemNotAllowedError; end
-  class TypeEnforcementAlreadyDefined < StandardError; end
-  class MethodNotAllowedError < StandardError; end
+  #
+  # An error raised when calling specific methods on a collection which must maintain its order.
+  # @see Collectible::Collection::MaintainSortOrder
+  #
+  class MethodNotAllowedError < Error; end
 end

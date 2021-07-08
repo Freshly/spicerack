@@ -2,6 +2,10 @@
 
 module Collectible
   module Collection
+    #
+    # A module for wrapping collection method with callbacks
+    # allowing to maintain collection's order
+    #
     module MaintainSortOrder
       extend ActiveSupport::Concern
 
@@ -12,6 +16,7 @@ module Collectible
         maintain_sorted_order_after :initialize, :push, :<<, :concat
       end
 
+      # rubocop:disable Metrics/BlockLength
       class_methods do
         def inherited(base)
           base.maintain_sort_order if maintain_sort_order?
@@ -55,6 +60,7 @@ module Collectible
           end
         end
       end
+      # rubocop:enable Metrics/BlockLength
     end
   end
 end
