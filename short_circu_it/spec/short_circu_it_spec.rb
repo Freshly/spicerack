@@ -17,6 +17,10 @@ RSpec.describe ShortCircuIt do
           expensive_method(args.first)
         end
 
+        define_method spec_context.memoized_method_with_block do |&block|
+          block.call
+        end
+
         define_method :expensive_method do |nth|
           last_value = 0
           current_value = 1
@@ -42,7 +46,8 @@ RSpec.describe ShortCircuIt do
 
     let(:memoized_method_with_args) { :method_with_arguments }
     let(:memoized_method_without_args) { :method_without_arguments }
-    let(:memoized_methods) { [ memoized_method_with_args, memoized_method_without_args ] }
+    let(:memoized_method_with_block) { :method_with_block }
+    let(:memoized_methods) { [ memoized_method_with_args, memoized_method_without_args, memoized_method_with_block ] }
 
     let(:all_observer_methods) { %i[observed_value_one observed_value_two] }
 
@@ -109,23 +114,23 @@ RSpec.describe ShortCircuIt do
     end
 
     shared_examples_for "a memoized value" do
-      let!(:initial_value) { target_instance.public_send(memoized_method, *arguments) }
+      let!(:initial_value) { target_instance.public_send(memoized_method, *arguments, &block) }
 
       it "memoizes the value" do
         target_change
         argument_change
-        expect(target_instance.public_send(memoized_method, *arguments)).to eq initial_value
+        expect(target_instance.public_send(memoized_method, *arguments, &block)).to eq initial_value
         expect(target_instance).to have_received(:expensive_method).exactly(:once)
       end
     end
 
     shared_examples_for "a new value" do
-      let!(:initial_value) { target_instance.public_send(memoized_method, *arguments) }
+      let!(:initial_value) { target_instance.public_send(memoized_method, *arguments, &block) }
 
       it "gets a new value" do
         target_change
         argument_change
-        target_instance.public_send(memoized_method, *arguments)
+        target_instance.public_send(memoized_method, *arguments, &block)
         expect(target_instance).to have_received(:expensive_method).twice
       end
     end
@@ -192,6 +197,7 @@ RSpec.describe ShortCircuIt do
 
     shared_examples_for "a method that takes no arguments" do |with_memoization: true|
       let(:arguments) { [] }
+      let(:block) { nil }
 
       context "when the method observes nothing" do
         it_behaves_like "a method that observes nothing", with_memoization
@@ -212,6 +218,30 @@ RSpec.describe ShortCircuIt do
 
     shared_examples_for "a method that takes arguments" do |with_memoization: true|
       let(:arguments) { Array(rand(1..4)) { rand(100) } }
+      let(:block) { nil }
+
+      context "when arguments do NOT change between calls" do
+        context "when the method observes nothing" do
+          it_behaves_like "a method that observes nothing", with_memoization
+        end
+
+        context "when the method observes self" do
+          it_behaves_like "a method that observes self", with_memoization
+        end
+
+        context "when the method observes one method" do
+          it_behaves_like "a method that observes one method", with_memoization
+        end
+
+        context "when the method observes multiple methods" do
+          it_behaves_like "a method that observes multiple methods", with_memoization
+        end
+      end
+    end
+
+    shared_examples_for "a method that takes a block" do |with_memoization: true|
+      let(:arguments) { [] }
+      let(:block) { -> { rand 100 } }
 
       context "when arguments do NOT change between calls" do
         context "when the method observes nothing" do
@@ -304,6 +334,12 @@ RSpec.describe ShortCircuIt do
         let(:memoized_method) { memoized_method_with_args }
 
         it_behaves_like "a method that takes arguments", with_memoization: true
+      end
+
+      context "when the method takes a block" do
+        let(:memoized_method) { memoized_method_with_args }
+
+        it_behaves_like "a method that takes a block", with_memoization: true
       end
 
       context "when the method is memoized in a parent class" do
