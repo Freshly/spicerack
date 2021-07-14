@@ -13,15 +13,16 @@ RSpec.shared_examples "a thread reader" do
   subject { receiver }
 
   let(:value) { double }
+  let(:namespace) {}
 
   it { is_expected.to define_thread_reader(method, thread_key, private: private?) }
 
   context "with value set on thread" do
     subject { receiver.__send__(method) }
 
-    before { Tablesalt::ThreadAccessor.store[thread_key] = value }
+    before { Tablesalt::ThreadAccessor.store(namespace)[thread_key] = value }
 
-    after { Tablesalt::ThreadAccessor.store[thread_key] = nil }
+    after { Tablesalt::ThreadAccessor.store(namespace)[thread_key] = nil }
 
     it { is_expected.to eq value }
 

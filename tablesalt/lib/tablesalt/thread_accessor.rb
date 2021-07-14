@@ -5,6 +5,7 @@ require "active_support/core_ext/module/delegation"
 
 require_relative "thread_accessor/management"
 require_relative "thread_accessor/rack_middleware"
+require_relative "thread_accessor/scoped_accessor"
 require_relative "thread_accessor/store_instance"
 require_relative "thread_accessor/thread_store"
 
@@ -18,6 +19,24 @@ module Tablesalt
 
     include StoreInstance
 
+    class << self
+      # @example
+      #   module MyGem
+      #     class MyClass
+      #       include Tablesalt::ThreadAccessor[:my_gem]
+      #
+      #       # Stored in a separate thread store for :my_gem, safe from mischievous app developers
+      #       thread_accessor :foo, :my_foo
+      #     end
+      #   end
+      #
+      # @param scope [String, Symbol] A namespace for the thread variables
+      # @return [Module] A ThreadAccessor module to be included into your class
+      def [](scope)
+        @scoped_accessors ||= {}
+        @scoped_accessors[scope] ||= ScopedAccessor.new(scope)
+      end
+    end
 
     module ClassMethods
       include StoreInstance

@@ -14,6 +14,7 @@ RSpec.shared_examples "a thread writer" do
 
   let(:method_name) { "#{method}=" }
   let(:value) { double }
+  let(:namespace) {}
   let(:private?) { true }
 
   before { receiver.__send__(method_name, value) }
@@ -21,7 +22,7 @@ RSpec.shared_examples "a thread writer" do
   it { is_expected.to eq value }
 
   it "writes to the thread store" do
-    expect(Tablesalt::ThreadAccessor.store[thread_key]).to eq value
+    expect(Tablesalt::ThreadAccessor.store(namespace)[thread_key]).to eq value
   end
 
   it "has expected privacy" do

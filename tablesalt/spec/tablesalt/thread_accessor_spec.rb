@@ -11,6 +11,50 @@ RSpec.describe Tablesalt::ThreadAccessor do
   it { expect(example_class.private_methods).to include :__thread_accessor_namespace__ }
   it { expect(example_class.private_methods).to include :__thread_accessor_store_instance__ }
 
+  describe ".[]" do
+    let(:namespace) { Faker::Lorem.word }
+    let(:namespaced_example_class) do
+      Class.new.include(described_class[namespace])
+    end
+    let(:namespaced_instance) { namespaced_example_class.new }
+
+    describe ".thread_reader" do
+      before { namespaced_example_class.__send__(:thread_reader, method, thread_key) }
+
+      it_behaves_like "a thread reader" do
+        let(:receiver) { namespaced_instance }
+      end
+
+      it_behaves_like "a thread reader" do
+        let(:receiver) { namespaced_example_class }
+      end
+    end
+
+    describe ".thread_writer" do
+      before { namespaced_example_class.__send__(:thread_writer, method, thread_key) }
+
+      it_behaves_like "a thread writer" do
+        let(:receiver) { namespaced_instance }
+      end
+
+      it_behaves_like "a thread writer" do
+        let(:receiver) { namespaced_example_class }
+      end
+    end
+
+    describe ".thread_accessor" do
+      before { namespaced_example_class.__send__(:thread_accessor, method, thread_key) }
+
+      it_behaves_like "a thread accessor" do
+        let(:receiver) { namespaced_instance }
+      end
+
+      it_behaves_like "a thread accessor" do
+        let(:receiver) { namespaced_example_class }
+      end
+    end
+  end
+
   describe ".thread_reader" do
     before { example_class.__send__(:thread_reader, method, thread_key, private: private?) }
 
