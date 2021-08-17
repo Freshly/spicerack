@@ -89,8 +89,13 @@ module Tablesalt
       # Note::
       #   All written thread variables are tracked on-thread, but will not be automatically cleared when
       #   the thread is done processing a request/unit of work. Make sure to either use the provided
-      #   {ThreadAccessor::RackMiddleware} or run {ThreadAccessor.clear_thread_variables!} manually once
+      #   {ThreadAccessor::RackMiddleware} or run {ThreadAccessor.clean_thread_context} manually once
       #   the thread is finished to avoid pollluting other requests.
+      #
+      # Gem Authors::
+      #   Thread variables should ideally be kept in a namespaced store instead of the global one. This means
+      #   you are responsible for clearing your own store - either add your own middleware or advise users how
+      #   to clear the thread store themselves.
       #
       # @param method [String, Symbol] The name of the writer method
       # @param thread_key [String, Symbol] The key to write to on Thread.current
