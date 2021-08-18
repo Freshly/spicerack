@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.configure do |config|
-  config.around(:each) do |example|
-    Tablesalt::ThreadAccessor.clean_thread_context(&example)
+  config.after(:each) do
+    Thread.current[Tablesalt::ThreadAccessor::STORE_THREAD_KEY] = nil
   end
 end

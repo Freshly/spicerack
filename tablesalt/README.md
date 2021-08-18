@@ -146,6 +146,17 @@ module MyGem
 end
 ```
 
+#### Test Helpers
+
+If your application uses ThreadAccessor, you'll need to clear the thread stores between test runs. 
+* **RSpec**
+  If you're using RSpec, you're in luck! Just `require tablesalt/spec_helper` in `spec_helper.rb` or `rails_helper.rb`.
+* **Minitest & others**
+  If you're using Minitest or some other testing framework, you'll need to clear things out manually. This is pretty simple, just run the following after each test run:
+  ```ruby
+  Thread.current[Tablesalt::ThreadAccessor::STORE_THREAD_KEY] = nil
+  ```
+
 ### UsesHashForEquality
 
 TODO: write usage instructions
