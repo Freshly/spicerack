@@ -51,7 +51,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install libsqlite3-dev
         sudo apt-get install redis-server
-        gem install bundler
+        gem install bundler:2.2.16
         bundle config path vendor/bundle
         bundle update activesupport activerecord
         bundle install --jobs 4 --retry 3

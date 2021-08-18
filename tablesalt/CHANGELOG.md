@@ -2,6 +2,8 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
+- Isolated ThreadAccessor store, Rack middleware ([#462](https://github.com/Freshly/spicerack/pull/462))
+
 ## v0.26.0.4
 
 *Release Date*: 5/17/2021

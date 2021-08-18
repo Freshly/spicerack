@@ -2,19 +2,19 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
+### Tablesalt - [see changes](tablesalt/CHANGELOG.md#Upcoming)
+
 ## v0.26.0.4
 
 *Release Date*: 5/17/2021
 
-- No changes
-
-### Conjunction - [see changes](conjunction/CHANGELOG.md#Upcoming)
+### Conjunction - [see changes](conjunction/CHANGELOG.md#v0.26.0.4)
 
 ## v0.26.0.3
 
 *Release Date*: 5/4/2021
 
-### Substance - [see changes](substance/CHANGELOG.md#Upcoming)
+### Substance - [see changes](substance/CHANGELOG.md#v0.26.0.3)
 
 ## v0.26.0.2
 
