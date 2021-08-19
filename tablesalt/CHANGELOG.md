@@ -3,7 +3,8 @@
 ## Upcoming <!-- Add unreleased change notes here: -->
 
 - Isolated ThreadAccessor store, Rack middleware ([#462](https://github.com/Freshly/spicerack/pull/462))
-- Added namespaced thread stores for gem usage ([#463](https://github.com/Freshly/spicerack/pull/463))
+- Added namespaced thread stores for gem usage ([#463](https://github.com/Freshly/spicerack/pull/463), ([#464](https://github.com/Freshly/spicerack/pull/464)), ([#466](https://github.com/Freshly/spicerack/pull/466)))
+- Add `define_thread_writer` and `define_thread_accessor` custom matchers ([#467](https://github.com/Freshly/spicerack/pull/467))
 
 ## v0.26.0.4
 
