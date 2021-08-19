@@ -14,6 +14,8 @@
 RSpec.shared_examples "a thread accessor" do
   subject { receiver }
 
+  let(:namespace) { nil }
+
   it_behaves_like "a thread reader"
   it_behaves_like "a thread writer"
 
