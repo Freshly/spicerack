@@ -10,7 +10,7 @@
 #   private?
 #      - boolean, true if the method is expected to be private. Default: true
 RSpec.shared_examples "a thread writer" do
-  subject(:write) { receiver.__send__(method_name, value) }
+  subject { receiver }
 
   let(:method_name) { "#{method}=" }
   let(:value) { double }
@@ -19,17 +19,19 @@ RSpec.shared_examples "a thread writer" do
 
   before { receiver.__send__(method_name, value) }
 
-  it { is_expected.to eq value }
+  it { is_expected.to define_thread_writer method, thread_key, namespace: namespace, private: private? }
 
   it "writes to the thread store" do
     expect(Tablesalt::ThreadAccessor.store(namespace)[thread_key]).to eq value
   end
 
   it "has expected privacy" do
+    klass = receiver.is_a?(Module) ? receiver : receiver.class
+
     if private?
-      expect { receiver.public_send(method_name, value) }.to raise_error(NoMethodError)
+      expect(klass).to be_private_method_defined method_name
     else
-      expect { receiver.public_send(method_name, value) }.not_to raise_error
+      expect(klass).not_to be_private_method_defined method_name
     end
   end
 end

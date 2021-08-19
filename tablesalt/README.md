@@ -52,11 +52,11 @@ TODO: write usage instructions
 In the simplest use case, a ThreadAccessor can be used to set a value on the current working thread to be used later on. The `thread_accessor` method creates a singleton and instance method for reading and writing a given variable stored on the thread.
 
 #### Defined methods
-* `thread_reader(method_name, thread_key = method_name, private: false)`
+* `thread_reader(method_name, thread_key = method_name, private: true)`
   Defines singleton method and instance method to read from the given thread key.
-* `thread_writer(method_name, thread_key = method_name, private: false)`
+* `thread_writer(method_name, thread_key = method_name, private: true)`
   Defines singleton method and instance method to write to the given thread key.
-* `thread_accessor(method_name, thread_key = method_name, private: false)`
+* `thread_accessor(method_name, thread_key = method_name, private: true)`
   Calls `thread_reader` and `thread_writer` with the given arguments.
   
 #### Example
@@ -148,13 +148,18 @@ end
 
 #### Test Helpers
 
+Tablesalt's spec helper provides custom RSpec matchers for thread accessor methods:
+* `defines_thread_accessor(name, thread_key, private: true, namespace: nil)`
+* `defines_thread_reader(name, thread_key, private: true, namespace: nil)`
+* `defines_thread_writer(name, thread_key, private: true, namespace: nil)`
+
 If your application uses ThreadAccessor, you'll need to clear the thread stores between test runs. 
 * **RSpec**
   If you're using RSpec, you're in luck! Just `require tablesalt/spec_helper` in `spec_helper.rb` or `rails_helper.rb`.
 * **Minitest & others**
   If you're using Minitest or some other testing framework, you'll need to clear things out manually. This is pretty simple, just run the following after each test run:
   ```ruby
-  Thread.current[Tablesalt::ThreadAccessor::STORE_THREAD_KEY] = nil
+  Thread.current[Tablesalt::ThreadAccessor::THREAD_ACCESSOR_STORE_THREAD_KEY] = nil
   ```
 
 ### UsesHashForEquality

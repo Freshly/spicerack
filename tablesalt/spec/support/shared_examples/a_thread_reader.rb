@@ -14,6 +14,7 @@ RSpec.shared_examples "a thread reader" do
 
   let(:value) { double }
   let(:namespace) {}
+  let(:private?) { true }
 
   it { is_expected.to define_thread_reader(method, thread_key, private: private?, namespace: namespace) }
 

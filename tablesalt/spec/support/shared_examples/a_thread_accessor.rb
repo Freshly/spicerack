@@ -6,10 +6,16 @@
 #   thread_key
 #      - the key the thread accessor actually uses under the hood
 #   receiver
-#      - the receiver of the accessor methods.
+#      - Required; the receiver of the accessor methods.
 #   private?
-#      - boolean, true if the method is expected to be private
+#      - Optional, boolean; true if the method is expected to be private. Default: true
+#   namespace
+#      - Optional; the namespace for the thread store. Default: nil
 RSpec.shared_examples "a thread accessor" do
+  subject { receiver }
+
   it_behaves_like "a thread reader"
   it_behaves_like "a thread writer"
+
+  it { is_expected.to define_thread_accessor method, thread_key, private: private?, namespace: namespace }
 end

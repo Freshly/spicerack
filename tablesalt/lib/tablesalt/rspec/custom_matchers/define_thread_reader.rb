@@ -5,7 +5,7 @@ require "active_support/core_ext/hash/keys"
 # RSpec matcher to assert the definition of a thread accessor
 #
 #     class MyClass
-#       include Tablesalt::ConfigDelegation
+#       include Tablesalt::ThreadAccessor
 #
 #       thread_reader :a_thread_key
 #     end
