@@ -88,7 +88,7 @@ RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **opti
   end
 
   def namespace_failure_message
-    return unless namespace.present?
+    return if namespace.blank?
 
     " in #{namespace.inspect} namespace"
   end
