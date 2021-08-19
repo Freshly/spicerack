@@ -4,7 +4,7 @@ module Tablesalt
   module ThreadAccessor
     module Management
       def store(namespace = nil)
-        stores = Thread.current[Tablesalt::ThreadAccessor::STORE_THREAD_KEY] ||= {}
+        stores = Thread.current[Tablesalt::ThreadAccessor::THREAD_ACCESSOR_STORE_THREAD_KEY] ||= {}
         stores[namespace] ||= ThreadStore.new
       end
 

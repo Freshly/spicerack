@@ -5,11 +5,8 @@ module Tablesalt
     module StoreInstance
       private
 
-      # Internal method used for thread store scoping
-      def __thread_accessor_namespace__; end
-
       def __thread_accessor_store_instance__
-        ThreadAccessor.store(__thread_accessor_namespace__)
+        ThreadAccessor.store(respond_to?(:const_get) ? self::THREAD_ACCESSOR_STORE_NAMESPACE : self.class::THREAD_ACCESSOR_STORE_NAMESPACE)
       end
     end
   end

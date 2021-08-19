@@ -12,7 +12,7 @@ module Tablesalt
         extend Management
         include ThreadAccessor
 
-        define_method(:__thread_accessor_scope__) { scope }
+        const_set :THREAD_ACCESSOR_STORE_NAMESPACE, scope
       end
 
       def name

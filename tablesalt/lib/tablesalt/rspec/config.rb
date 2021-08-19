@@ -2,6 +2,6 @@
 
 RSpec.configure do |config|
   config.after(:each) do
-    Thread.current[Tablesalt::ThreadAccessor::STORE_THREAD_KEY] = nil
+    Thread.current[Tablesalt::ThreadAccessor::THREAD_ACCESSOR_STORE_THREAD_KEY] = nil
   end
 end

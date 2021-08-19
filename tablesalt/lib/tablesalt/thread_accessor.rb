@@ -15,7 +15,10 @@ module Tablesalt
     extend ActiveSupport::Concern
     extend Management
 
-    STORE_THREAD_KEY = :__tablesalt_thread_accessor_store__
+    THREAD_ACCESSOR_STORE_THREAD_KEY = :__tablesalt_thread_accessor_store__
+
+    # nil by default, gets overridden by ScopedAccessor
+    THREAD_ACCESSOR_STORE_NAMESPACE = nil
 
     include StoreInstance
 

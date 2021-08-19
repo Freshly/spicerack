@@ -15,7 +15,7 @@ RSpec.shared_examples "a thread reader" do
   let(:value) { double }
   let(:namespace) {}
 
-  it { is_expected.to define_thread_reader(method, thread_key, private: private?) }
+  it { is_expected.to define_thread_reader(method, thread_key, private: private?, namespace: namespace) }
 
   context "with value set on thread" do
     subject { receiver.__send__(method) }

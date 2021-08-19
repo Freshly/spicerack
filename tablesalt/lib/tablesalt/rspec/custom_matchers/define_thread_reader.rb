@@ -16,20 +16,21 @@ require "active_support/core_ext/hash/keys"
 #       it { is_expected.to define_thread_reader :a_thread_key, private: false }
 #     end
 RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **options|
-  attr_reader :subject, :method_name, :thread_key, :private_opt
+  attr_reader :subject, :method_name, :thread_key, :private_opt, :namespace
 
-  description { "defines#{a_private} thread reader #{method_name.inspect} with thread key #{thread_key.inspect}" }
+  description { "define#{a_private} thread reader #{method_name.inspect} with thread key #{thread_key.inspect}#{namespace_failure_message}" }
 
-  failure_message { "expected #{subject_module} to define#{a_private} thread reader #{method_name.inspect} with thread key #{thread_key.inspect}" }
-  failure_message_when_negated { "expected #{subject_module} not to define#{a_private} thread reader #{method_name.inspect} with thread key #{thread_key.inspect}" }
+  failure_message { "expected #{subject_module} to define#{a_private} thread reader #{method_name.inspect} with thread key #{thread_key.inspect}#{namespace_failure_message}" }
+  failure_message_when_negated { "expected #{subject_module} not to define#{a_private} thread reader #{method_name.inspect} with thread key #{thread_key.inspect}#{namespace_failure_message}" }
 
-  match_unless_raises do |subject|
-    options.assert_valid_keys(:private)
+  match do |subject|
+    options.assert_valid_keys(:private, :namespace)
 
     @subject = subject
     @method_name = method_name
     @thread_key = thread_key.to_sym
     @private_opt = options.fetch(:private, true)
+    @namespace = options.fetch(:namespace, nil)
 
     with_value_on_thread do
       expect(instance).to be_respond_to(method_name, true)
@@ -50,11 +51,12 @@ RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **opti
   private
 
   def with_value_on_thread
-    Tablesalt::ThreadAccessor.store[thread_key] = stubbed_value
+    value_before = Tablesalt::ThreadAccessor.store(namespace)[thread_key]
+    Tablesalt::ThreadAccessor.store(namespace)[thread_key] = stubbed_value
 
     yield
 
-    Tablesalt::ThreadAccessor.store[thread_key] = nil
+    Tablesalt::ThreadAccessor.store(namespace)[thread_key] = value_before
   end
 
   def subject_module
@@ -83,5 +85,11 @@ RSpec::Matchers.define :define_thread_reader do |method_name, thread_key, **opti
     return unless private_opt
 
     " a private"
+  end
+
+  def namespace_failure_message
+    return unless namespace.present?
+
+    " in #{namespace.inspect} namespace"
   end
 end
