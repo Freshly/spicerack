@@ -13,6 +13,19 @@ RSpec.describe Tablesalt::ThreadAccessor::Management do
   describe ".store" do
     subject { Tablesalt::ThreadAccessor.store }
 
+    let(:namespace) { Faker::Lorem.unique.word }
+    let(:another_namespace) { Faker::Lorem.unique.word }
+
+    shared_examples_for "a namespaced store" do
+      it { is_expected.to eq({}) }
+      it { is_expected.to be_a Tablesalt::ThreadAccessor::ThreadStore }
+      it { is_expected.to eq Tablesalt::ThreadAccessor::ThreadStore.new }
+      it { is_expected.to equal Tablesalt::ThreadAccessor.store(namespace) }
+      it { is_expected.not_to equal Tablesalt::ThreadAccessor.store }
+      it { is_expected.not_to equal Tablesalt::ThreadAccessor.store(another_namespace) }
+
+    end
+
     it { is_expected.to eq({}) }
     it { is_expected.to be_a Tablesalt::ThreadAccessor::ThreadStore }
     it { is_expected.to eq Tablesalt::ThreadAccessor::ThreadStore.new }
@@ -21,13 +34,21 @@ RSpec.describe Tablesalt::ThreadAccessor::Management do
     context "when namespace is given" do
       subject { Tablesalt::ThreadAccessor.store(namespace) }
 
-      let(:namespace) { Faker::Lorem.word }
+      it_behaves_like "a namespaced store"
+    end
 
-      it { is_expected.to eq({}) }
-      it { is_expected.to be_a Tablesalt::ThreadAccessor::ThreadStore }
-      it { is_expected.to eq Tablesalt::ThreadAccessor::ThreadStore.new }
-      it { is_expected.to equal Tablesalt::ThreadAccessor.store(namespace) }
-      it { is_expected.not_to equal Tablesalt::ThreadAccessor.store }
+    context "when using a scoped accessor" do
+      subject { Tablesalt::ThreadAccessor[namespace].store }
+
+      it_behaves_like "a namespaced store"
+
+      context "when requesting a namespaced store from a scoped accessor" do
+        subject(:store) { Tablesalt::ThreadAccessor[namespace].store(another_namespace) }
+
+        it "raises" do
+          expect { store }.to raise_error ArgumentError, "cannot request a namespaced store from a namespaced accessor"
+        end
+      end
     end
   end
 

@@ -4,6 +4,10 @@ module Tablesalt
   module ThreadAccessor
     module Management
       def store(namespace = nil)
+        raise ArgumentError, "cannot request a namespaced store from a namespaced accessor" if namespace.present? && self::THREAD_ACCESSOR_STORE_NAMESPACE.present?
+
+        namespace = self::THREAD_ACCESSOR_STORE_NAMESPACE if namespace.nil?
+
         stores = Thread.current[Tablesalt::ThreadAccessor::THREAD_ACCESSOR_STORE_THREAD_KEY] ||= {}
         stores[namespace] ||= ThreadStore.new
       end
