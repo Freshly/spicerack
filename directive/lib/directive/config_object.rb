@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "active_model"
-require "active_support/core_ext/object/inclusion"
 require "substance/input_object"
 require "tablesalt/stringable_object"
 
@@ -50,7 +49,7 @@ module Directive
       end
 
       def _ensure_safe_option_name(name)
-        raise ArgumentError, "#{name.inspect} is reserved and cannot be used at a config option" if name.in?(RESERVED_WORDS)
+        raise ArgumentError, "#{name.inspect} is reserved and cannot be used at a config option" if name.in? RESERVED_WORDS
         raise ArgumentError, "#{name.inspect} is defined twice" if _nested_options.include?(name)
 
         puts "Warning: the config option #{name} is already defined" if _options.include?(name) # rubocop:disable Rails/Output

@@ -2,8 +2,6 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
-- Add potentially missing require ([#473](https://github.com/Freshly/spicerack/pull/473))
-
 ## v0.27.1
 
 *Release Date*: 9/3/2021

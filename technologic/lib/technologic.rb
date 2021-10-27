@@ -5,7 +5,6 @@ require "active_support/callbacks"
 require "active_support/inflector"
 require "active_support/core_ext/hash/keys"
 require "active_support/core_ext/module/delegation"
-require "active_support/core_ext/object/inclusion"
 require "active_support/core_ext/string/inflections"
 
 require "short_circu_it"
