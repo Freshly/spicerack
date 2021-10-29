@@ -3,6 +3,8 @@
 module Technologic
   class Logger
     class << self
+      include Technologic
+
       def log(severity, event)
         return unless defined?(Rails)
 
