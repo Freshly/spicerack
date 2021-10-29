@@ -10,5 +10,5 @@ RSpec.describe Collectible::CollectionBase do
   it { is_expected.to include_module Collectible::Collection::WrapsCollectionMethods }
   it { is_expected.to include_module Collectible::Collection::EnsuresItemEligibility }
   it { is_expected.to include_module Collectible::Collection::MaintainSortOrder }
+  it { is_expected.to include_module Collectible::Collection::Finder }
 end
-

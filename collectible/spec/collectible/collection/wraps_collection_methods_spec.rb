@@ -109,13 +109,13 @@ RSpec.describe Collectible::Collection::WrapsCollectionMethods, type: :concern d
     end
 
     describe "#each" do
-      subject(:returned_collection) { example_collection.each { } }
+      subject(:returned_collection) { example_collection.each {} }
 
       it_behaves_like "it returns the same collection"
     end
 
     describe "#reverse_each" do
-      subject(:returned_collection) { example_collection.each { } }
+      subject(:returned_collection) { example_collection.each {} }
 
       it_behaves_like "it returns the same collection"
     end

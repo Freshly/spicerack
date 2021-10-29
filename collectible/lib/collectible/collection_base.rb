@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "collection/core"
-require_relative "collection/wraps_collection_methods"
-require_relative "collection/ensures_item_eligibility"
-require_relative "collection/maintain_sort_order"
-require_relative "collection/finder"
-
 module Collectible
+  #
+  # A class to inherit from for utilizing Collectible functionality in
+  # a specific collection.
+  # @abstract
+  #
   class CollectionBase
     include ShortCircuIt
 

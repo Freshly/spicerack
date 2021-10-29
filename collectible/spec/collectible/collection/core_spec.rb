@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_string_literal: true
-
 RSpec.describe Collectible::Collection::Core, type: :concern do
   include_context "with an example collection"
 

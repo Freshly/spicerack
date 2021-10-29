@@ -52,9 +52,7 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
   describe ".maintain_sorted_order_after" do
     let(:items) { unshuffled_items.shuffle }
     let(:incomparable_item) { Faker::Hipster.word }
-    let(:unshuffled_items) do
-      Array.new(rand(3..8)) { rand(100) }
-    end
+    let(:unshuffled_items) { Array.new(rand(3..8)) { rand(100) } }
 
     before do
       raise ArgumentError, "items parameter must contain at least 3 items" unless items.length >= 3
@@ -70,8 +68,10 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
       context "when an incomparable object is inserted" do
         before { items << incomparable_item }
 
-        it "raises an ArgumentError" do
-          expect { example_collection_class.new(items) }.to raise_error ArgumentError
+        it "raises an ItemTypeMismatchError" do
+          expect { example_collection_class.new(items) }.to raise_error(
+            Collectible::ItemTypeMismatchError, %r{item mismatch}
+          )
         end
       end
     end
@@ -101,7 +101,9 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
         let(:added_item) { incomparable_item }
 
         it "raises an ArgumentError" do
-          expect { example_collection.push(incomparable_item) }.to raise_error ArgumentError
+          expect { example_collection.push(incomparable_item) }.to raise_error(
+            Collectible::ItemTypeMismatchError, %r{item mismatch}
+          )
         end
       end
     end
@@ -131,7 +133,9 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
         let(:added_item) { incomparable_item }
 
         it "raises an ArgumentError" do
-          expect { example_collection << incomparable_item }.to raise_error ArgumentError
+          expect { example_collection << incomparable_item }.to raise_error(
+            Collectible::ItemTypeMismatchError, %r{item mismatch}
+          )
         end
       end
     end
@@ -161,7 +165,9 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
         before { added_items << incomparable_item }
 
         it "raises an ArgumentError" do
-          expect { example_collection.concat(added_items) }.to raise_error ArgumentError
+          expect { example_collection.concat(added_items) }.to raise_error(
+            Collectible::ItemTypeMismatchError, %r{item mismatch}
+          )
         end
       end
     end
@@ -170,7 +176,9 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
       subject(:unshift) { example_collection.unshift(items.sample) }
 
       it "raises an error" do
-        expect { unshift }.to raise_error Collectible::MethodNotAllowedError, "cannot call unshift when sorted"
+        expect { unshift }.to raise_error(
+          Collectible::MethodNotAllowedError, %r{cannot call unshift when sorted}
+        )
       end
     end
 
@@ -178,7 +186,9 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
       subject(:insert) { example_collection.insert(items.sample, 0) }
 
       it "raises an error" do
-        expect { insert }.to raise_error Collectible::MethodNotAllowedError, "cannot call insert when sorted"
+        expect { insert }.to raise_error(
+          Collectible::MethodNotAllowedError, %r{cannot call insert when sorted}
+        )
       end
     end
 
@@ -186,7 +196,9 @@ RSpec.describe Collectible::Collection::MaintainSortOrder, type: :concern do
       subject(:prepend) { example_collection.prepend(items.sample(2)) }
 
       it "raises an error" do
-        expect { prepend }.to raise_error Collectible::MethodNotAllowedError, "cannot call prepend when sorted"
+        expect { prepend }.to raise_error(
+          Collectible::MethodNotAllowedError, %r{cannot call prepend when sorted}
+        )
       end
     end
   end
