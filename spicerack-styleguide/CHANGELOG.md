@@ -2,6 +2,10 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
+## v0.27.2
+
+*Release Date*: 7/14/2022
+
 - Bump rubocop gems to latest-ish ([#477](https://github.com/Freshly/spicerack/pull/477))
 
 ## v0.27.1

@@ -2,7 +2,13 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
+## v0.27.2
+
+*Release Date*: 7/14/2022
+
 ### Spicerack::Styleguide - [see changes](spicerack-styleguide/CHANGELOG.md#Upcoming)
+
+- Drop support for Ruby 2.5
 
 ## v0.27.1
 
