@@ -1444,8 +1444,6 @@ RSpec/InstanceSpy:
 RSpec/InstanceVariable:
   Enabled: true
   AssignmentOnly: false
-RSpec/InvalidPredicateMatcher:
-  Enabled: true
 RSpec/ItBehavesLike:
   Enabled: true
   EnforcedStyle: it_behaves_like
@@ -1525,17 +1523,17 @@ RSpec/VoidExpect:
 RSpec/Yield:
   Enabled: true
 
-FactoryBot/AttributeDefinedStatically:
+RSpec/FactoryBot/AttributeDefinedStatically:
   Enabled: true
-FactoryBot/CreateList:
+RSpec/FactoryBot/CreateList:
   Enabled: true
   EnforcedStyle: create_list
-FactoryBot/FactoryClassName:
+RSpec/FactoryBot/FactoryClassName:
     Enabled: true
 
-Capybara/CurrentPathExpectation:
+RSpec/Capybara/CurrentPathExpectation:
   Enabled: true
-Capybara/FeatureMethods:
+RSpec/Capybara/FeatureMethods:
   Enabled: false
-Capybara/VisibilityMatcher:
+RSpec/Capybara/VisibilityMatcher:
   Enabled: true
