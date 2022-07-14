@@ -2,6 +2,8 @@
 
 ## Upcoming <!-- Add unreleased change notes here: -->
 
+### Spicerack::Styleguide - [see changes](spicerack-styleguide/CHANGELOG.md#Upcoming)
+
 ## v0.27.1
 
 *Release Date*: 9/3/2021
