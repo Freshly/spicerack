@@ -24,15 +24,15 @@ jobs:
           - ["3.0.x", "6.1.0"]
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v2
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-gems-${{ matrix.rubies }}-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-${{ matrix.rubies }}
     - name: Set up Ruby ${{ matrix.rubies[0] }}
-      uses: actions/setup-ruby@v2
+      uses: actions/setup-ruby@v3
       with:
         ruby-version: ${{ matrix.rubies[0] }}
     - name: Apply Rails ${{ matrix.rubies[1] }} dependencies
