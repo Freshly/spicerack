@@ -33,7 +33,30 @@ Or install it yourself as:
 
 ### ClassPass
 
-TODO: write usage instructions
+Utility for creating single-ingress service objects.
+
+```ruby
+class MyClass
+  class << self
+    def call(foo:, bar:)
+      new(foo: foo, bar: bar).call
+    end
+  end
+  
+  def call
+    ...
+end
+
+# Can be rewritten as:
+class MyClass
+  include ClassPass
+  
+  class_pass_method :call
+  
+  def call
+    ...
+end
+```
 
 ### DSLAccessor
 
